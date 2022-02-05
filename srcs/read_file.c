@@ -15,43 +15,32 @@ static int	ft_count_words(char *line,char sp)
 	return (width);
 }
 
-static void	store_row_color(pnt *matrix, char *line)
-{
-	char	**split;
-	int		j;
-	int		i;
-
-	j = 0;
-	split = ft_split(line, ' ');
-
-	while (split[j])
-	{
-		matrix[j].z = ft_atoi(split[j]);
-		matrix[i].color = ft_hextoi(split[i]);
-		++j;
-	}
-	free(split);
-}
-
 static void	store_row(pnt *matrix, char *line)
 {
 	char	**split;
+	char	**tab;
 	int		j;
-	int		i;
 
 	j = 0;
 	split = ft_split(line, ' ');
-	if (ft_strchr(split[j], ',') == NULL)
+	
+	while (split[j])
 	{
-		while (split[j])
+		if (ft_strchr(split[j], ',') == NULL)
 		{
 			matrix[j].z = ft_atoi(split[j]);
-			++j;
+			matrix[j].color = -1;
 		}
-		free(split);
+		else if (ft_strchr(split[j], ',') != NULL)
+		{
+			tab = ft_split(split[j], ',');
+			matrix[j].z = ft_atoi(tab[0]);
+			matrix[j].color = ft_hextoi(tab[1]);
+			free(tab);
+		}
+		++j;
 	}
-	else 
-		store_row_color(matrix, line);
+	free(split);
 }
 
 

@@ -12,9 +12,9 @@
 
 # define  WHITE_COLOR  0xffffff
 # define  RED_COLOR 0xe80c0c
-# define MAX(x, y)(x > y) ? x:y
-# define MDUL(index) (index >= 0) ? index:-index
-# define ZOOM(height) (height > 100) ? 3:18
+#define MAX(a, b) (a > b ? a : b)
+#define ABS(a) ((a < 0) ? -a : a)
+# define ZOOM(height) (height > 100) ? 3:3
 
 # define HEIGHT			1080
 # define WIDTH			1920
@@ -54,7 +54,7 @@ typedef struct s_fdf
 	int pad_h;
 	int zom;
 	pnt **matrix;
-	t_data_img img;
+	t_data_img *img;
 } fdf ;
 
 typedef struct store_data
@@ -73,9 +73,13 @@ int		deal_key(int key, fdf *param);
 int    ft_hextoi(const char *str);
 char 	*ft_gnl(int fd);
 void	my_mlx_pixel_put(fdf *data, int x, int y, int color);
+void	draw_map(fdf *fdf);
 
 
 // error 
 void	h_error(void);
+
+// init
+void	img_init(t_data_img *map_data);
 
 #endif

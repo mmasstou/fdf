@@ -13,7 +13,7 @@ _END=\x1b[0m
 
 HEADER = ./incs
 
-SRC = srcs/ft_hextoi.c  srcs/gnl.c srcs/read_file.c get_next_line/get_next_line.c  get_next_line/get_next_line_utils.c srcs/main.c 
+SRC = srcs/ft_hextoi.c  srcs/gnl.c srcs/read_file.c get_next_line/get_next_line.c  get_next_line/get_next_line_utils.c srcs/errors.c  srcs/ft_init.c srcs/main.c  srcs/draw.c
 OBJ = $(SRC:.c=.o)
 
 CC = gcc

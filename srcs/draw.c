@@ -1,75 +1,85 @@
 #include "../incs/fdf.h"
 
-void    ft_bresenham(fdf *m_size, int i, int j, int i1, int j1)
+int clo(float z, float z1)
 {
-    float di;
-    float dj;
-    int Val;
-    int z;
-    int z1;
-   
-
-    
-
-    
-    //zoom
-    i *= m_size->zom;
-    j *= m_size->zom;
-    i1 *= m_size->zom;
-    j1 *= m_size->zom;
-    
-    
-    // m_size->color = (z) ? 0xe80c0c : 0xffffff; 
-    
-
-    i += m_size->pad_h;
-    j += m_size->pad_w;
-    i1 += m_size->pad_h;
-    j1 += m_size->pad_w;
-    
-    
-    di = i1 - i;
-    dj = j1 - j;
+	if (z || z1)
+		return (0xe80c0c);
+	else
+		return(0xffffff);
+}
+void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
+{
+	float	dx;
+	float	dy;
+	float	o;
+	int		max;
+	int		color;
+	float		z;
+	float		z1;
 
 
+	o = 1.085;
+	color = fdf->matrix[(int)y1][(int)x1].color;
+	z = fdf->matrix[(int)y1][(int)x1].z;
+	z1 = fdf->matrix[(int)y2][(int)x2].z;
+	
+	if (color == -1)
+		color = 0xffffff;
 
-    Val = MAX(MDUL(di), MDUL(dj));
-    
-    di /= Val;
-    dj /= Val;
-    //printf("%f - %f\n", di, dj);
-    // m_size->map[i1][j1]->color;
-    
-    while ((int)(i - i1) || (int)(j - j1))
-    {
-        //m_size->color = (( m_size ) == 1) ? 0xe80c0c : 0xffffff;
-		my_mlx_pixel_put(m_size, i, j,m_size->matrix[i][j].color);
-        // mlx_pixel_put(m_size->mlx_ptr, m_size->win_ptr, i, j, m_size->color);
-        i += di;
-        j += dj;
-        //printf("%d - %d\n", i , j);
-    }
-    //printf("%d - %d(colon)\n", m_size->line_num, m_size->column_num);
-    //printf("%d(j) - %d(i) - %d\n", a, b, m_size->map[a][b].z);
+	// if (color == -1)
+	// 	color = clo(z1);
+
+	x1 *= fdf->zom;
+	y1 *= fdf->zom;
+	x2 *= fdf->zom;
+	y2 *= fdf->zom;
+
+
+	x1 = (x1 - y1) * cos(o); 
+	y1 = (x1 + y1) * sin(o) - z;  
+	x2 = (x2 - y2) * cos(o); 
+	y2 = (x2 + y2) * sin(o) - z1; 
+
+	x1 += fdf->pad_w;
+	y1 += fdf->pad_h;
+	x2 += fdf->pad_w;
+	y2 += fdf->pad_h;
+
+
+
+
+
+	dx = x2 - x1;
+	dy = y2 - y1;
+	max = MAX(ABS(dx), ABS(dy));
+	dx /= max;
+	dy /= max;
+	while ((int)(x1 - x2) || (int)(y1 - y2))
+	{
+		printf("%f -- %f\n",x1,y1);
+		mlx_pixel_put(fdf->img->mlx, fdf->img->win, x1, y1, color);
+		x1 += dx;
+		y1 += dy;
+	}
 }
 
-void    draw(fdf  *m_size)
+void	draw_map(fdf *fdf)
 {
-	int i;
-	int j;
+	int	x;
+	int	y;
 
-	i = 0;
-    while (i < m_size->height)
-    {
-        j = 0;
-        while (j <= m_size->width)
-        {
-            if (j < m_size->width)
-                ft_bresenham(m_size, j, i, j + 1, i); 
-            if (i < m_size->height - 1)
-                ft_bresenham(m_size, j, i, j, i + 1);
-            j++;   
-        }
-        i++;
-    }
+	y = 0;
+	while (y < fdf->height)
+	{
+		x = 0;
+		while (x < fdf->width)
+		{
+			if (x < fdf->width - 1)
+				dda(x, y, x + 1, y, fdf);
+			if (y < fdf->height - 1)
+				dda(x, y, x, y + 1, fdf);
+			x++;
+		}
+		y++;
+	}
 }

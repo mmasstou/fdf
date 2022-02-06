@@ -1,5 +1,20 @@
 #include "../incs/fdf.h"
 
+void	ft_mange_win(char *argv1, fdf *map_data)
+{
+	char **split;
+
+
+	split = ft_split(argv1, '/');
+	printf("%s\n",split[1]);
+	//split = ft_split(split[-2], '.');
+	map_data->zom = ZOOM(map_data->height); 
+	map_data->pad_w = (WIDTH / 2) - ((map_data->width / 4) - 90);
+	map_data->pad_h = (HEIGHT / 2) - ((map_data->height / 6) + 420);
+
+	map_data->img->mlx = mlx_init();
+	map_data->img->win = mlx_new_window(map_data->img->mlx, WIDTH, HEIGHT, split[1]);
+}
 
 int main(int argc, char *argv[])
 {
@@ -15,11 +30,12 @@ int main(int argc, char *argv[])
 
 	map_data->img = (t_data_img *)malloc(sizeof(t_data_img));
 
-	map_data->zom = ZOOM(map_data->height); 
-	map_data->pad_w = (WIDTH / 2) - (map_data->width / 2) - map_data->zom;
-	map_data->pad_h = (HEIGHT / 2) - (map_data->height / 2) - map_data->zom;
-	map_data->img->mlx = mlx_init();
-	map_data->img->win = mlx_new_window(map_data->img->mlx, WIDTH, HEIGHT, "FdF");
+	ft_mange_win(argv[1], map_data);
+	// map_data->zom = ZOOM(map_data->height); 
+	// map_data->pad_w = (WIDTH / 2) - ((map_data->width / 4) - 90);
+	// map_data->pad_h = (HEIGHT / 2) - ((map_data->height / 4) + 120);
+	// map_data->img->mlx = mlx_init();
+	// map_data->img->win = mlx_new_window(map_data->img->mlx, WIDTH, HEIGHT, "FdF5vfgfg");
 	//map_data->img->img.img = mlx_new_image(map_data->img->mlx, 800, 600);
 	//map_data->img->img.addr = mlx_get_data_addr(map_data->img->img.img, &map_data->img->img.bpp, &map_data->img->img.line_len,
 	//		&map_data->img->img.endian);

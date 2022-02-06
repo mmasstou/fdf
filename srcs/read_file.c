@@ -62,7 +62,7 @@ static void	ft_get_data(fdf *fdf, char *fname)
 	i = 0;
 	while (line)
 	{
-		store_row(fdf->matrix[i], line);
+		store_row(fdf->matrix[i                                                                                                                               ], line);
 		line = get_next_line(fd);
 		++i;
 	}

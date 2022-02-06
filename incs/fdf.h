@@ -14,7 +14,12 @@
 # define  RED_COLOR 0xe80c0c
 #define MAX(a, b) (a > b ? a : b)
 #define ABS(a) ((a < 0) ? -a : a)
-# define ZOOM(height) (height > 100) ? 3:3
+# define ZOOM(height) (height < 100) ? 9:3
+
+
+
+
+
 
 # define HEIGHT			1080
 # define WIDTH			1920
@@ -52,7 +57,7 @@ typedef struct s_fdf
 	int win_h;
 	int pad_w;
 	int pad_h;
-	int zom;
+	float zom;
 	pnt **matrix;
 	t_data_img *img;
 } fdf ;

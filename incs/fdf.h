@@ -14,7 +14,7 @@
 # define  RED_COLOR 0xe80c0c
 #define MAX(a, b) (a > b ? a : b)
 #define ABS(a) ((a < 0) ? -a : a)
-# define ZOOM(height) (height < 100) ? 9:3
+
 
 
 
@@ -57,7 +57,7 @@ typedef struct s_fdf
 	int win_h;
 	int pad_w;
 	int pad_h;
-	float zom;
+	int zom;
 	pnt **matrix;
 	t_data_img *img;
 } fdf ;
@@ -79,6 +79,7 @@ int    ft_hextoi(const char *str);
 char 	*ft_gnl(int fd);
 void	my_mlx_pixel_put(fdf *data, int x, int y, int color);
 void	draw_map(fdf *fdf);
+int	ft_movekey(int key, fdf *m_size);
 
 
 // error 

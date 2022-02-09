@@ -23,7 +23,7 @@
 
 # define HEIGHT			1080
 # define WIDTH			1920
-
+# define ALTITUDE 2.5
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
@@ -57,7 +57,7 @@ typedef struct s_fdf
 	int win_h;
 	int pad_w;
 	int pad_h;
-	int zom;
+	float zom;
 	pnt **matrix;
 	t_data_img *img;
 } fdf ;
@@ -88,4 +88,7 @@ void	h_error(void);
 // init
 void	img_init(t_data_img *map_data);
 
+
+// windows tools 
+void	ft_swap(int *x, int *y);
 #endif

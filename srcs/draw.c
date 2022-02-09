@@ -8,9 +8,6 @@ int clo(float z, float z1)
 		return(0xffffff);
 }
 
-
-
-
 void	custom_mlx_pixel_put(fdf *map, int x, int y, int color)
 {
 	char	*dst;
@@ -32,10 +29,12 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 	int		color;
 	float		z;
 	float		z1;
+	int			retation;
 
 
-	o = .9;
-	r = .8;
+	o = .785398163397448;
+	r = .785398163397448;
+	retation = 295;
 	color = fdf->matrix[(int)y1][(int)x1].color;
 	//printf("%d\n",color);
 	z = fdf->matrix[(int)y1][(int)x1].z;
@@ -54,12 +53,14 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 
 
 	x1 = (x1 - y1) * cos(o); 
-	y1 = (x1 + y1) * sin(r) - z; 
+	y1 = (x1 + y1) * sin(r) -( ALTITUDE *  z) ; 
 
 
 	x2 = (x2 - y2) * cos(o); 
-	y2 = (x2 + y2) * sin(r) - z1; 
+	y2 = (x2 + y2) * sin(r) - ( ALTITUDE * z1); 
 
+
+	
 
 	x1 += fdf->pad_w;
 	y1 += fdf->pad_h;
@@ -71,6 +72,7 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 
 	dx = x2 - x1;
 	dy = y2 - y1;
+
 	max = MAX(ABS(dx), ABS(dy));
 	dx /= max;
 	dy /= max;
@@ -87,17 +89,6 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 
 
 
-
-
-
-// void	ft_swap(int *x, int *y)
-// {
-// 	int	tmp;
-
-// 	tmp = *x;
-// 	*x = *y;
-// 	*y = tmp;
-// }
 
 // void	ft_trid(int *x, int *y, int z)
 // {
@@ -203,25 +194,40 @@ void	draw_map(fdf *fdf)
 	int	x;
 	int	y;
 
-	y = 0;
-	while (y < fdf->height)
+	x = 0;
+	// while (y < fdf->height)
+	// {
+	// 	x = 0;
+	// 	while (x < fdf->width)
+	// 	{
+	// 		if (x < fdf->width - 1)
+	// 		{
+	// 			//bresenham(x, y, x + 1, y, fdf);
+	// 			dda(x, y, x + 1, y, fdf);
+	// 		}
+	// 		if (y < fdf->height - 1)
+	// 		{
+	// 			//bresenham(x, y, x, y + 1, fdf);
+	// 			dda(x, y, x, y + 1, fdf);
+	// 		}
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
+
+
+	while (x < fdf->width)
 	{
-		x = 0;
-		while (x < fdf->width)
+		y = 0;
+		while (y < fdf->height)
 		{
 			if (x < fdf->width - 1)
-			{
-				//bresenham(x, y, x + 1, y, fdf);
 				dda(x, y, x + 1, y, fdf);
-			}
 			if (y < fdf->height - 1)
-			{
-				//bresenham(x, y, x, y + 1, fdf);
 				dda(x, y, x, y + 1, fdf);
-			}
-			x++;
+			y++;
 		}
-		y++;
+		x++;
 	}
 }
 

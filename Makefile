@@ -13,7 +13,7 @@ _END=\x1b[0m
 
 HEADER = ./incs
 
-SRC = srcs/ft_hextoi.c  srcs/gnl.c srcs/read_file.c get_next_line/get_next_line.c  get_next_line/get_next_line_utils.c srcs/errors.c  srcs/ft_init.c srcs/main.c  srcs/draw.c
+SRC = srcs/ft_hextoi.c  srcs/gnl.c srcs/read_file.c get_next_line/get_next_line.c  get_next_line/get_next_line_utils.c srcs/errors.c  srcs/ft_init.c srcs/main.c  srcs/draw.c srcs/draw_tools.c
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
@@ -29,7 +29,7 @@ $(NAME): $(OBJ)
 	@echo "\033[1;5;1;36m";
 	@echo "$(_RED)+------------------------+";
 	@echo "|  $(_GREEN)______ _____  ______  $(_RED)|";
-	@echo "| $(_GREEN)|  ____|  __ \|  ____| $(_RED)|";
+	@echo "| $(_GREEN)|  ____|  __/|  ____| $(_RED)|";
 	@echo "| $(_GREEN)| |__  | |  | | |__    $(_RED)|";
 	@echo "| $(_GREEN)|  __| | |  | |  __|   $(_RED)|";
 	@echo "| $(_GREEN)| |    | |__| | |      $(_RED)|";

@@ -5,41 +5,25 @@ void	ft_zoom(fdf *map)
 {
 	float  c;
 	int		x;
-	// int	height;
-	// int	width;
-
-	// height = map->win_h;
-	// height -= (map->win_h / 0.75);
-	// height /= map->zom;
-
-	// width = map->win_w;
-	// width -= (map->win_w / 0.25);
-	// width /= map->zom;
-
+	
 	x = MAX(map->height, map->width);
 	printf("x | =%d\n",x);
-	c = (x - 20) / 26.6666666667 ; 
+	c = (x - 20) / 26.6666666667 ;
 	map->zom = 20 - c;
-	printf("map->zom| =%d\n",map->zom);
+	printf("map->zom| =%f\n",map->zom);
 }
-void	ft_mange_win(char *argv1, fdf *map_data)
+
+void	ft_padding(fdf *map_data)
 {
-	char **split;
+	map_data->pad_w = ((map_data->win_w  - map_data->width)/ 2);
+	map_data->pad_h = ((map_data->win_w - map_data->height)/ 2);
+	map_data->pad_w = map_data->win_w / 2;
+	map_data->pad_h = map_data->win_h / 6;
+}
 
-
-	split = ft_split(argv1, '/');
-	printf("%s\n",split[1]);
-	//split = ft_split(split[-2], '.');
-	
-	ft_zoom(map_data) ;
-	img_init(map_data->img);
-	// map_data->pad_w = (WIDTH / 2) - ((map_data->width / 4) - 90);
-	// map_data->pad_h = (HEIGHT / 2) - ((map_data->height / 6) + 420);
-	// map_data->height *= map_data->zom;
-	// map_data->width *= map_data->zom;
-
-	
-
+void	ft_win_resolution(fdf *map_data)
+{
+	ft_zoom(map_data);
 	map_data->win_h = map_data->width;
 	map_data->win_h += ( map_data->width * .25);	
 	
@@ -51,17 +35,59 @@ void	ft_mange_win(char *argv1, fdf *map_data)
 	map_data->win_h *= map_data->zom;
 
 	if (map_data->win_w >= 2592)
+	{
 		map_data->win_w = 2592;
-	if (map_data->win_h >= 1640)
-		map_data->win_h = 1640;
+		map_data->zom -= 1.6;
+	}
+	if (map_data->win_h >= 1440)
+	{
+		map_data->win_h = 1440;
+		map_data->zom -= 1.4;
+	}
+}
 
-	map_data->pad_w = ((map_data->win_w  - map_data->width)/ 2);
-	map_data->pad_h = ((map_data->win_w - map_data->height)/ 2) + 42;
+void	ft_mange_win(char *argv1, fdf *map_data)
+{
+	char **split;
+
+
+	split = ft_split(argv1, '/');
+	printf("%s\n",split[1]);
+	//split = ft_split(split[-2], '.');
+	
+	ft_zoom(map_data) ;
+	img_init(map_data->img);
+	ft_win_resolution(map_data);
+	ft_padding(map_data);
+	// map_data->pad_w = (WIDTH / 2) - ((map_data->width / 4) - 90);
+	// map_data->pad_h = (HEIGHT / 2) - ((map_data->height / 6) + 420);
+	// map_data->height *= map_data->zom;
+	// map_data->width *= map_data->zom;
+
+	
+
+	// map_data->win_h = map_data->width;
+	// map_data->win_h += ( map_data->width * .25);	
+	
+
+	// map_data->win_w = map_data->height;
+	// map_data->win_w += ( map_data->height * .75);	
+	
+	// map_data->win_w *= map_data->zom;
+	// map_data->win_h *= map_data->zom;
+
+	// if (map_data->win_w >= 2592)
+	// 	map_data->win_w = 2592;
+	// if (map_data->win_h >= 1640)
+	// 	map_data->win_h = 1640;
+
+	// map_data->pad_w = ((map_data->win_w  - map_data->width)/ 2);
+	// map_data->pad_h = ((map_data->win_w - map_data->height)/ 2) + 42;
 
 
 
-	map_data->pad_w = map_data->win_w / 2;
-	map_data->pad_h = map_data->win_h / 6;
+	// map_data->pad_w = map_data->win_w / 2;
+	// map_data->pad_h = map_data->win_h / 6;
 
 
 	// printf("map_data->zom  = %d\n",map_data->zom);

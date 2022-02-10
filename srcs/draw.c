@@ -12,7 +12,7 @@ void	custom_mlx_pixel_put(fdf *map, int x, int y, int color)
 {
 	char	*dst;
 
-	if((x >= 0 && x < map->win_w) && (y >= 0 && y < map->win_h))
+	if((x >= 0 && x < WIDTH) && (y >= 0 && y < HEIGHT))
 	{
 		dst = map->img->img_addr + (y * map->img->line_len + x * (map->img->bpp / 8));
 		*(unsigned int *)dst = color;
@@ -23,17 +23,13 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 {
 	float	dx;
 	float	dy;
-	float	o;
-	float	r;
+
 	int		max;
 	int		color;
 	float		z;
 	float		z1;
 	int			retation;
 
-
-	o = .785398163397448;
-	r = .785398163397448;
 	retation = 295;
 	color = fdf->matrix[(int)y1][(int)x1].color;
 	//printf("%d\n",color);
@@ -52,12 +48,12 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 	y2 *= fdf->zom;
 
 
-	x1 = (x1 - y1) * cos(o); 
-	y1 = (x1 + y1) * sin(r) -( ALTITUDE *  z) ; 
+	x1 = (x1 - y1) * cos(ALPHA); 
+	y1 = (x1 + y1) * sin(BETA) -( ALTITUDE *  z) ; 
 
 
-	x2 = (x2 - y2) * cos(o); 
-	y2 = (x2 + y2) * sin(r) - ( ALTITUDE * z1); 
+	x2 = (x2 - y2) * cos(ALPHA); 
+	y2 = (x2 + y2) * sin(BETA) - ( ALTITUDE * z1); 
 
 
 	
@@ -157,6 +153,8 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 
 // 	dx = ABS(x2 - x1);
 // 	dy = ABS(y2 - y1);
+
+
 // 	steep = dy > dx;
 // 	if (steep)
 // 	{
@@ -249,12 +247,10 @@ int	ft_movekey(int key, fdf *m_size)
 	printf("m_size->win_h%d\n", m_size->win_h);
 	printf("m_size->win_w%d\n", m_size->win_w);
 	printf("------------------------------\n");
-	printf("m_size->height%d\n", m_size->height);
-	printf("m_size->width%d\n", m_size->width);
-	printf("------------------------------\n");
+	
 	mlx_clear_window(m_size->img->mlx, m_size->img->win);
 	mlx_destroy_image(m_size->img->mlx, m_size->img->img);
-	m_size->img->img = mlx_new_image(m_size->img->mlx, m_size->win_w, m_size->win_h);
+	m_size->img->img = mlx_new_image(m_size->img->mlx, WIDTH, HEIGHT);
 	m_size->img->img_addr = mlx_get_data_addr(m_size->img->img, &m_size->img->bpp, &m_size->img->line_len, &m_size->img->endian);
 	draw_map(m_size);
 	mlx_put_image_to_window(m_size->img->mlx, m_size->img->win, m_size->img->img, 0, 0);

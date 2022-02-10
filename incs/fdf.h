@@ -15,15 +15,17 @@
 #define MAX(a, b) (a > b ? a : b)
 #define ABS(a) ((a < 0) ? -a : a)
 
+# define ALPHA .785398163397448
+# define BETA .785398163397448
 
 
 
 
 
 
-# define HEIGHT			1080
-# define WIDTH			1920
-# define ALTITUDE 2.5
+# define HEIGHT			1180
+# define WIDTH			2020
+# define ALTITUDE 1
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
@@ -91,4 +93,6 @@ void	img_init(t_data_img *map_data);
 
 // windows tools 
 void	ft_swap(int *x, int *y);
+void	ft_trid(int *x, int *y, int z);
+
 #endif

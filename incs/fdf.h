@@ -17,14 +17,18 @@
 
 # define ALPHA .785398163397448
 # define BETA .785398163397448
+# define TETA  (90 - ALPHA) 
 
 
 
 
 
 
-# define HEIGHT			1180
-# define WIDTH			2020
+# define HEIGHT			1240
+# define WIDTH			2192
+
+// # define WIDTH 1800
+// # define HEIGHT 1250
 # define ALTITUDE 1
 # define STDIN 0
 # define STDOUT 1

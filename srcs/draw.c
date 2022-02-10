@@ -3,7 +3,7 @@
 int clo(float z, float z1)
 {
 	if (z || z1)
-		return (0xffffff);
+		return (0xe80c0c);
 	else
 		return(0xffffff);
 }
@@ -28,43 +28,29 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 	int		color;
 	float		z;
 	float		z1;
-	int			retation;
 
-	retation = 295;
 	color = fdf->matrix[(int)y1][(int)x1].color;
-	//printf("%d\n",color);
 	z = fdf->matrix[(int)y1][(int)x1].z;
 	z1 = fdf->matrix[(int)y2][(int)x2].z;
 	
 	if (color == -1)
 		color = clo(z, z1);
 
-	// if (color == -1)
-	// 	color = clo(z1);
-
 	x1 *= fdf->zom;
 	y1 *= fdf->zom;
 	x2 *= fdf->zom;
 	y2 *= fdf->zom;
 
-
 	x1 = (x1 - y1) * cos(ALPHA); 
 	y1 = (x1 + y1) * sin(BETA) -( ALTITUDE *  z) ; 
 
-
 	x2 = (x2 - y2) * cos(ALPHA); 
 	y2 = (x2 + y2) * sin(BETA) - ( ALTITUDE * z1); 
-
-
-	
 
 	x1 += fdf->pad_w;
 	y1 += fdf->pad_h;
 	x2 += fdf->pad_w;
 	y2 += fdf->pad_h;
-
-
-
 
 	dx = x2 - x1;
 	dy = y2 - y1;
@@ -75,9 +61,7 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 	
 	while ((int)(x1 - x2) || (int)(y1 - y2))
 	{
-		//printf("%f -- %f\n",x1,y1);
 		custom_mlx_pixel_put(fdf, x1, y1, color);
-		//mlx_pixel_put(fdf->img->mlx, fdf->img->win, x1, y1, color);
 		x1 += dx;
 		y1 += dy;
 	}

@@ -1,4 +1,5 @@
 NAME = fdf1
+LIBFT_NAME = libft/libft.a
 
 #Colors
 _GREY=\x1b[30m
@@ -33,14 +34,14 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJ_MANDATORY)
 	@make  bonus -C libft/
-	@$(CC) -o $(NAME)  $(OBJ) $(OBJ_MANDATORY) libft/libft.a  $(FRAMEWORKS)  -g
+	@$(CC) -o $(NAME)  $(OBJ) $(OBJ_MANDATORY) $(LIBFT_NAME)   $(FRAMEWORKS)  -g
 	@echo "\033[1;5;1;36m";
 	@echo "+-$(_WHITE_WHITE)mmasstou$(_WHITE)------MANDATORY-+";
 	@echo "\033[0m"
 	
 bonus : $(OBJ) $(OBJ_BONUS)
 	@make bonus -C libft/
-	@$(CC) -o $(NAME)  $(OBJ) $(OBJ_BONUS) libft/libft.a  $(FRAMEWORKS)  -g
+	@$(CC) -o $(NAME)  $(SRC) $(SRC_BONUS) $(LIBFT_NAME) $(FRAMEWORKS)  -g
 	@echo "\033[0m"
 	@echo "\033[1;5;1;36m";
 	@echo "+-$(_WHITE_WHITE)mmasstou$(_WHITE)--------BONUS-+";

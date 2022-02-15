@@ -14,9 +14,32 @@ void	ft_drawline(fdf *map, int x, int y, int color)
 
 	if((x >= 0 && x < WIDTH) && (y >= 0 && y < HEIGHT))
 	{
-		dst = map->img->img_addr + (y * map->img->line_len + x * (map->img->bpp / 8));
+		dst = map->img->img_addr + ( y * map->img->line_len + x * (map->img->bpp / 8));
 		*(unsigned int *)dst = color;
+
 	}
+}
+
+static void isomitric_fdf(float *x, float *y, float z , fdf *data)
+{
+	if (data->key == rotate_x_UP || data->key == rotate_x_DOWN)
+	{
+		z = -*y * sin(data->alpha) + z * cos(data->alpha);
+		*y = *y * cos(data->alpha) + z * sin(data->alpha);
+
+	}
+	else if (data->key == rotate_y_UP || data->key == rotate_y_DOWN)
+	{
+		z = -*x * sin(data->alpha) + z * cos(data->alpha);
+		*x = *x * cos(data->alpha) + z * sin(data->alpha);
+	}
+	else if (data->key == rotate_z_UP || data->key == rotate_z_DOWN)
+	{
+		*x = *x * cos(data->alpha) + *y * sin(data->alpha);
+		*y = *y * cos(data->alpha) + *x * sin(data->alpha);
+	}
+    *x = (*x - *y) * cos(data->beta);
+    *y = -z + (*x + *y) * sin(data->beta);
 }
 
 void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
@@ -28,10 +51,14 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 	int		color;
 	float		z;
 	float		z1;
+	double 		gama;
+	double 		gama1;
 
 	color = fdf->matrix[(int)y1][(int)x1].color;
 	z = fdf->matrix[(int)y1][(int)x1].z;
+	gama = fdf->matrix[(int)y1][(int)x1].gama;
 	z1 = fdf->matrix[(int)y2][(int)x2].z;
+	gama1 = fdf->matrix[(int)y2][(int)x2].gama;
 	
 	if (color == -1)
 		color = ft_color(z, z1);
@@ -42,9 +69,14 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 	y2 *= fdf->zom;
 
 
-	ft_trid(&x1, &y1, z, fdf);
-	ft_trid(&x2, &y2, z1, fdf);
-	
+
+
+	z *= fdf->altitude;
+	z1 *= fdf->altitude;
+
+	isomitric_fdf(&x1, &y1, z, fdf);
+	isomitric_fdf(&x2, &y2, z1, fdf);
+
 	x1 += fdf->pad_w;
 	y1 += fdf->pad_h;
 	x2 += fdf->pad_w;
@@ -64,16 +96,6 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 		y1 += dy;
 	}
 }
-
-
-
-
-void	ft_trid(float *x, float *y, int z, fdf *data)
-{
-	*x = (*x - *y) * cos(data->alpha);
-	*y = (*x + *y) * sin(data->alpha) - ( data->altitude *  z);
-}
-
 
 void	draw_map(fdf *fdf)
 {

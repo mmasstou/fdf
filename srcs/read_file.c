@@ -1,6 +1,6 @@
 #include "../incs/fdf.h"
 
-static int	ft_count_words(char *line,char sp)
+int	ft_count_words(char *line,char sp)
 {
 	char	**tab;
 	int		width;
@@ -30,12 +30,14 @@ static void	store_row(pnt *matrix, char *line)
 		{
 			matrix[j].z = ft_atoi(split[j]);
 			matrix[j].color = -1;
+			matrix[j].gama = acos(matrix[j].z);
 		}
 		else if (ft_strchr(split[j], ',') != NULL)
 		{
 			tab = ft_split(split[j], ',');
 			matrix[j].z = ft_atoi(tab[0]);
 			matrix[j].color = ft_hextoi(tab[1]);
+			matrix[j].gama = acos(matrix[j].z);
 			free(tab);
 		}
 		++j;
@@ -77,12 +79,11 @@ void	ft_readfile(fdf *fdf, char *fname)
 	int		fd;
 
 	fd = open(fname, O_RDONLY);
-	if (fd < 1)
-		h_error();
 	line = get_next_line(fd);
 	fdf->width = ft_count_words(line, ' ');
 	while (line)
 	{
+		check_line(line, fdf);
 		line = get_next_line(fd);
 		++fdf->height;
 	}

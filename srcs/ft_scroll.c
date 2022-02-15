@@ -8,19 +8,10 @@ int	ft_mousekey(int button, int x, int y, fdf *param)
 	printf("y%d\n",y);
 
 	if (button == SCROLL_UP)
-	{
-		param->zom += 0.5;
-		// if (param->zom > MAX_ZOM )
-		// 	param->zom = MAX_ZOM; scroll
-	}
-
-
+		param->zom += 0.15;
 	if (button == SCROLL_DOWN)
-	{
-		param->zom -= 0.5;
-		if (param->zom < MIN_ZOM )
-			param->zom = MIN_ZOM;
-	}
+		param->zom -= 0.13;	
+	
 	mlx_clear_window(param->img->mlx, param->img->win);
 	mlx_destroy_image(param->img->mlx, param->img->img);
 	param->img->img = mlx_new_image(param->img->mlx, WIDTH, HEIGHT);

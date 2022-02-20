@@ -59,11 +59,11 @@ int	main(int argc, char *argv[])
 {
 	fdf	*map_data;
 
+	map_data = data_init();
 	if ((argc >= 2 && argc <= 4) && check_fd(argv[1]))
 	{
 		if (argc == 2 || argc == 4)
 		{
-			data_init(map_data); // if -1 free fdf struct
 			ft_readfile(map_data, argv[1]);
 			ft_mange_win(argv, argc, map_data);
 			mlx_loop(map_data->img->mlx);

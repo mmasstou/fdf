@@ -13,9 +13,6 @@
 
 # define  WHITE_COLOR  0xffffff
 # define  RED_COLOR 0xe80c0c
-#define MAX(a, b) (a > b ? a : b)
-#define MIN(a, b) (a > b ? b : a)
-#define ABS(a) ((a < 0) ? -a : a)
 
 # define ALPHA .8
 # define BETA .8
@@ -62,9 +59,9 @@
 
 // COLORS KEY
 
-# define RED_COLORS 15
-# define BLUE_COLORS 11
-# define GREEN_COLORS 5
+# define RANDOM_COLORS 15
+# define DEFAULT_COLORS 5
+
 // ROTATION
 // rotate_x
 # define RO_X_UP 12 // Q
@@ -106,6 +103,14 @@ typedef struct mouse
 	bool click_up;
 	bool click_on;
 } mouse;
+
+typedef struct color
+{
+	int red;
+	int green;
+	int blue;
+}		t_color;
+
 typedef struct s_fdf
 {
 	int height;
@@ -125,13 +130,15 @@ typedef struct s_fdf
 	float gama;
 	// rotation
 
-	char *colos;
+	char *colos_name;
 	int		key;
 	bool first_click;
+	bool color_auto;
 	float *ro_x;	
 	float *ro_y;	
 	float *ro_z;
-	mouse *pos_m;	
+	mouse *pos_m;
+	t_color *color;	
 
 	pnt **matrix;
 	t_data_img *img;
@@ -171,10 +178,12 @@ void	ft_zoom(fdf *data, int _altitude, int _zoom);
 void	ft_padding(fdf *map_data);
 void	ft_swap(int *x, int *y);
 int 	ft_color(float z, float z1 ,fdf *fdf);
+int 	ft_rgb(int per_r, int per_g, int per_b);
 char	*ft_title(char *title);
 void	ft_win_resolution(fdf *map_data);
 void	ft_mange_win(char **argv, int argc, fdf *map_data);
 void	ft_trid(float *x, float *y,float *z, fdf *data);
+int 	ft_abs(int a);
 // BONUS PART
 int	ft_movekey(int key, fdf *m_size);
 int	ft_mousekey(int button, int x, int y, fdf *param);

@@ -1,74 +1,7 @@
 #include "../incs/fdf.h"
 
 
-void	print_menu(fdf *data)
-{
-	char	*menu;
-	int		colour;
 
-	
-	
-	menu = " Map Title : ";
-	menu = ft_strjoin(menu, data->title);
-	mlx_string_put(data->img->mlx, data->img->win, 996, 28, 0xFFFB00, menu);
-	
-	// menu = "BUTTON 1 - rotation mouse";
-	// mlx_string_put(data->img->mlx, data->img->win, 10, 30, colour, menu);
-
-	
-	// menu = "1, 2, 3 - def, iso, paralel projection";
-	// mlx_string_put(data->img->mlx, data->img->win, 10, 75, colour, menu);
-// 	menu = "4 - simple colour";
-// 	mlx_string_put(data->img->mlx, data->img->win, 10, 90, colour, menu);
-
-	colour = 0x9efa76;
-	menu = " Map Height : ";
-	menu = ft_strjoin(menu, ft_itoa(data->height));
-	mlx_string_put(data->img->mlx, data->img->win, 10, 20, colour, menu);
-
-	menu = " Map Width : ";
-	menu = ft_strjoin(menu, ft_itoa(data->width));
-	mlx_string_put(data->img->mlx, data->img->win, 10, 40, colour, menu);
-	menu = " Zoom : ";
-	menu = ft_strjoin(menu, ft_itoa(data->zom));
-	if (data->zom > 0)
-		colour = 0x9efa76;
-	mlx_string_put(data->img->mlx, data->img->win, 10, 60, colour, menu);
-	colour = 0xFF0001;
-	menu = " altitude : ";
-	menu = ft_strjoin(menu, ft_itoa(data->altitude));
-	if (data->altitude > 0)
-		colour = 0x9efa76;
-	mlx_string_put(data->img->mlx, data->img->win, 10, 80, colour, menu);
-	colour = 0xFF0001;
-
-	menu = " x : ";
-	menu = ft_strjoin(menu, ft_itoa(data->pad_w));
-	if (data->pad_w > 0 && data->pad_w < WIDTH)
-		colour = 0x9efa76;
-	mlx_string_put(data->img->mlx, data->img->win, 10, 100, colour, menu);
-	colour = 0xFF0001;
-	menu = " y : ";
-	menu = ft_strjoin(menu, ft_itoa(data->pad_h));
-	if (data->pad_h > 0 && data->pad_h < HEIGHT)
-		colour = 0x9efa76;
-	mlx_string_put(data->img->mlx, data->img->win, 10, 120, colour, menu);
-	menu = " Colors : ";
-	menu = ft_strjoin(menu, data->colos);
-	mlx_string_put(data->img->mlx, data->img->win, 10, 140, 0x9efa76, menu);
-	// 
-	colour = 0xFF7F00;
-	menu = " UP/DOWN/LEFT/RIGHT KEYBOARD KEY";
-	mlx_string_put(data->img->mlx, data->img->win, 10,HEIGHT - 60, colour, menu);
-	menu = " Q/A | W/S | E/D - rotation X/Y/Z ";
-	mlx_string_put(data->img->mlx, data->img->win, 10, HEIGHT - 40, colour, menu);
-	menu = " SCROLL MOUSE  -> zoom ";
-	mlx_string_put(data->img->mlx, data->img->win, 10, HEIGHT - 80, colour, menu);
-	menu = " ALTITUDE UP/DOWN   + / -";
-	mlx_string_put(data->img->mlx, data->img->win, 10,HEIGHT - 100, colour, menu);
-	menu = " LEFT CLICK AND MOUVE MOUSE TO MOUVE MAP";
-	mlx_string_put(data->img->mlx, data->img->win, 10,HEIGHT - 120, colour, menu);
-}
 
 
 void		ft_zoom(fdf *data, int _altitude, int _zoom)
@@ -105,7 +38,7 @@ void	ft_padding(fdf *map_data)
 	y = sin(map_data->alpha) * map_data->height * map_data->zom;
 	map_data->pad_h = HEIGHT - (x + y);
 	map_data->pad_h /= 2;
-	map_data->pad_h += MAX(x,y) / 2;
+	map_data->pad_h += fmax(x,y) / 2;
 }
 
 void	ft_win_resolution(fdf *map_data)
@@ -179,7 +112,12 @@ int main(int argc, char *argv[])
 			map_data->beta = 0.523599 ;
 			map_data->gama = 0.523599 ;
 			map_data->key = -1;
-			map_data->colos = ft_strdup("Non");
+			map_data->colos_name = ft_strdup("Default");
+			map_data->color_auto = true;
+			map_data->color = (t_color *)malloc(sizeof(t_color));
+			map_data->color->red = 0;
+			map_data->color->green = 0;
+			map_data->color->blue = 0;
 			ft_mange_win(argv, argc, map_data);
 			mlx_loop(map_data->img->mlx);
 		}

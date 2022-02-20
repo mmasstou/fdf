@@ -25,3 +25,10 @@ char	*ft_title(char *title)
 	//split[0] = ft_strjoin("graphics programming : ",split[0]);
 	return (split[0]);
 }
+
+int ft_abs(int a)
+{
+	if (a < 0)
+		a = -a;
+	return (a);
+}

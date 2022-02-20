@@ -22,7 +22,7 @@ OBJ_MANDATORY = $(SRC_MANDATORY:.c=.o)
 
 
 
-SRC_BONUS = srcs/fdf_bonus.c srcs/ft_translate.c srcs/ft_scroll.c srcs/ft_rotation.c
+SRC_BONUS = srcs/fdf_bonus.c srcs/ft_translate.c srcs/ft_scroll.c srcs/ft_rotation.c srcs/ft_colors.c srcs/menu.c
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 CC = gcc

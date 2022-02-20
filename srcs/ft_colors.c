@@ -1,48 +1,53 @@
 #include "../incs/fdf.h"
 
-int	rgb_percent(int p)
+static int	rgb_percent(int p)
 {
 	return ((255 * p) / 100);
 }
 
-void	ft_puthex(unsigned int nbr, char *hex)
+static void ft_puthex(unsigned int nbr , char *tab, int *i)
 {
-	int i;
 
 	if (nbr > 16)
 	{
-		ft_puthex(nbr / 16, hex);
-		ft_puthex(nbr % 16, hex);
+		ft_puthex(nbr / 16, tab, i);
+		ft_puthex(nbr % 16, tab, i);
 	}
 	else
 	{
-		i  = 0;
-		if (nbr > 10)
-			hex[i] = nbr + 48 ;
+		if (nbr < 10)
+		{
+			tab[*i] = nbr + 48;
+			*i += 1;
+		}
 		else 
-			hex[i] = (nbr - 10) + 'a';
-		i++;
-		hex[i] = '\0';
+		{
+			tab[*i] = (nbr - 10) + 'a';
+			*i += 1;
+		}
 	}
 }
 
-int	ft_colors(t_color color)
+int ft_rgb(int per_r, int per_g, int per_b)
 {
-	char *hex;
 	char *hexc;
-	int r;
-	int g;
-	int b;
+	int index;
+	int red;
+	int green;
+	int blue;
 
-	r = rgb_percent(color.r);
-	g = rgb_percent(color.g);
-	b = rgb_percent(color.b);
-	ft_puthex(r, hexc);
-	hex = ft_strdup(hexc);  // r
-	ft_puthex(g, hexc);
-	hex = ft_strjoin(hex, hexc); // g
-	ft_puthex(b, hexc);
-	hex = ft_strjoin(hex, hexc);  // b
-
-	return (ft_hextoi(hex));
+	index = 0;
+	hexc = (char *)malloc(14);
+	if (!hexc)
+		return (0);
+	red = rgb_percent(per_r);
+	green = rgb_percent(per_g);
+	blue = rgb_percent(per_b);
+	ft_puthex(red,hexc,&index);
+	ft_puthex(green,hexc,&index);
+	ft_puthex(blue,hexc,&index);
+	hexc = ft_strjoin("0x",hexc);
+	index = ft_hextoi(hexc);
+	free(hexc);
+	return (index);
 }

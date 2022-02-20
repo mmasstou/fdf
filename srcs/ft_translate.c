@@ -2,6 +2,7 @@
 
 int	ft_movekey(int key, fdf *m_size)
 {
+	printf("%d\n",key);
 	if (key == 126)
 		m_size->pad_h -= 10 ;
 	if (key == 125)
@@ -39,22 +40,17 @@ int	ft_movekey(int key, fdf *m_size)
 
 
 	// colors
-
-	if (key == RED_COLORS)
+	if (key == RANDOM_COLORS)
 	{
-		m_size->colos = ft_strdup("RED");
-		m_size->key = RED_COLORS;
+		m_size->colos_name = ft_strdup("Random");
+		m_size->key = RANDOM_COLORS;
 	}
-	if (key == BLUE_COLORS)
+	if (key == DEFAULT_COLORS)
 	{
-		m_size->colos = ft_strdup("BLUE");
-		m_size->key = BLUE_COLORS;
+		m_size->colos_name = ft_strdup("Default");
+		m_size->key = DEFAULT_COLORS;
 	}
-	if (key == GREEN_COLORS)
-	{
-		m_size->colos = ft_strdup("GREEN");
-		m_size->key = GREEN_COLORS;
-	}
+	
 	//dddddddddddprintf("++++++++++key+++++++++++ %d\n",key);
 	// printf("m_size->beta %f\n",m_size->beta);
 	// printf("m_size->alpha %f\n",m_size->alpha);

@@ -4,19 +4,15 @@ int ft_color(float z, float z1 ,fdf *fdf)
 {
 	int color;
 	(void)fdf;
-	color = 0xFFFFFF;
-
-	if (fdf->key == RED_COLORS)
-		color = 0xFF0000 * fdf->zom / 5;
-	else if (fdf->key == BLUE_COLORS)
-		color = 0x11CCEE * fdf->zom / 5;
-	else if (fdf->key == GREEN_COLORS)
-		color = 0xAAFF1C * fdf->zom / 5;
-	else
-	{
-		fdf->colos = ft_strdup("WHITE");
+	
+	if (fdf->key == RANDOM_COLORS)
+		color = 0xFFFFFF  * fabsf( fdf->zom / fdf->altitude);
+	else if (fdf->key == DEFAULT_COLORS)
 		color = 0xFFFFFF;
-	}
+	else 
+		color = 0xFFFFFF;
+
+
 	if (z || z1)
 		return(color);
 	else
@@ -39,7 +35,6 @@ void	ft_drawline(fdf *map, int x, int y, int color)
 	{
 		dst = map->img->img_addr + ( y * map->img->line_len + x * (map->img->bpp / 8));
 		*(unsigned int *)dst = color;
-
 	}
 }
 
@@ -49,7 +44,6 @@ static void isomitric_fdf(float *x, float *y, float z , fdf *data)
 	{
 		z = -*y * sin(data->alpha) + z * cos(data->alpha);
 		*y = *y * cos(data->alpha) + z * sin(data->alpha);
-
 	}
 	else if (data->key == RO_Y_UP || data->key == RO_Y_DOWN)
 	{
@@ -80,11 +74,8 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 	z = fdf->matrix[(int)y1][(int)x1].z;
 	z1 = fdf->matrix[(int)y2][(int)x2].z;
 	
-	if (color == -1)
+	if (color == -1 || color == 0xffffff)
 		color = ft_color(z, z1,fdf);
-	//color = ft_cccol(fdf, color);
-
-
 	x1 *= fdf->zom;
 	y1 *= fdf->zom;
 	x2 *= fdf->zom;
@@ -105,7 +96,7 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 	dx = x2 - x1;
 	dy = y2 - y1;
 
-	max = MAX(ABS(dx), ABS(dy));
+	max = fmax(fabs(dx), fabs(dy));
 	dx /= max;
 	dy /= max;
 	

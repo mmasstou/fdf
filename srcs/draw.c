@@ -1,13 +1,36 @@
 #include "../incs/fdf.h"
 
-int ft_color(float z, float z1)
+int ft_color(float z, float z1 ,fdf *fdf)
 {
-	if (z || z1)
-		return (0xffffff);
-	else
-		return(0xffffff);
-}
+	int color;
+	(void)fdf;
+	color = 0xFFFFFF;
 
+	if (fdf->key == RED_COLORS)
+		color = 0xFF0000 * fdf->zom / 5;
+	else if (fdf->key == BLUE_COLORS)
+		color = 0x11CCEE * fdf->zom / 5;
+	else if (fdf->key == GREEN_COLORS)
+		color = 0xAAFF1C * fdf->zom / 5;
+	else
+	{
+		fdf->colos = ft_strdup("WHITE");
+		color = 0xFFFFFF;
+	}
+	if (z || z1)
+		return(color);
+	else
+		return(color);
+}
+int ft_close(int key, fdf *param)
+{
+	if (key == 53)
+    {
+		mlx_destroy_window(param->img->mlx, param->img->win);
+		exit(0);
+	}
+	return (0);
+}
 void	ft_drawline(fdf *map, int x, int y, int color)
 {
 	char	*dst;
@@ -22,18 +45,18 @@ void	ft_drawline(fdf *map, int x, int y, int color)
 
 static void isomitric_fdf(float *x, float *y, float z , fdf *data)
 {
-	if (data->key == rotate_x_UP || data->key == rotate_x_DOWN)
+	if (data->key == RO_X_UP || data->key == RO_X_DOWN)
 	{
 		z = -*y * sin(data->alpha) + z * cos(data->alpha);
 		*y = *y * cos(data->alpha) + z * sin(data->alpha);
 
 	}
-	else if (data->key == rotate_y_UP || data->key == rotate_y_DOWN)
+	else if (data->key == RO_Y_UP || data->key == RO_Y_DOWN)
 	{
 		z = -*x * sin(data->alpha) + z * cos(data->alpha);
 		*x = *x * cos(data->alpha) + z * sin(data->alpha);
 	}
-	else if (data->key == rotate_z_UP || data->key == rotate_z_DOWN)
+	else if (data->key == RO_Z_UP || data->key == RO_Z_DOWN)
 	{
 		*x = *x * cos(data->alpha) + *y * sin(data->alpha);
 		*y = *y * cos(data->alpha) + *x * sin(data->alpha);
@@ -51,17 +74,16 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 	int		color;
 	float		z;
 	float		z1;
-	double 		gama;
-	double 		gama1;
 
+	
 	color = fdf->matrix[(int)y1][(int)x1].color;
 	z = fdf->matrix[(int)y1][(int)x1].z;
-	gama = fdf->matrix[(int)y1][(int)x1].gama;
 	z1 = fdf->matrix[(int)y2][(int)x2].z;
-	gama1 = fdf->matrix[(int)y2][(int)x2].gama;
 	
 	if (color == -1)
-		color = ft_color(z, z1);
+		color = ft_color(z, z1,fdf);
+	//color = ft_cccol(fdf, color);
+
 
 	x1 *= fdf->zom;
 	y1 *= fdf->zom;
@@ -73,7 +95,6 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 
 	z *= fdf->altitude;
 	z1 *= fdf->altitude;
-
 	isomitric_fdf(&x1, &y1, z, fdf);
 	isomitric_fdf(&x2, &y2, z1, fdf);
 
@@ -81,7 +102,6 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 	y1 += fdf->pad_h;
 	x2 += fdf->pad_w;
 	y2 += fdf->pad_h;
-
 	dx = x2 - x1;
 	dy = y2 - y1;
 

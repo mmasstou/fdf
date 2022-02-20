@@ -26,6 +26,7 @@ void	check_line(char *line, fdf *data)
 {
 	if (line[0] == '\n' && data->height == 0)
 	{
+		
 		ft_putstr_fd("No data found\n",2);
 		exit(1);
 	}

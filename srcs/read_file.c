@@ -30,14 +30,12 @@ static void	store_row(pnt *matrix, char *line)
 		{
 			matrix[j].z = ft_atoi(split[j]);
 			matrix[j].color = -1;
-			matrix[j].gama = acos(matrix[j].z);
 		}
 		else if (ft_strchr(split[j], ',') != NULL)
 		{
 			tab = ft_split(split[j], ',');
 			matrix[j].z = ft_atoi(tab[0]);
 			matrix[j].color = ft_hextoi(tab[1]);
-			matrix[j].gama = acos(matrix[j].z);
 			free(tab);
 		}
 		++j;

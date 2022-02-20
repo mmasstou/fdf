@@ -60,17 +60,21 @@
 # define SCROLL_DOWN 5
 
 
+// COLORS KEY
 
+# define RED_COLORS 15
+# define BLUE_COLORS 11
+# define GREEN_COLORS 5
 // ROTATION
 // rotate_x
-# define rotate_x_UP 12 // Q
-# define rotate_x_DOWN 0 // A
+# define RO_X_UP 12 // Q
+# define RO_X_DOWN 0 // A
 // rotate_y
-# define rotate_y_UP 13 // W
-# define rotate_y_DOWN 1 // S
+# define RO_Y_UP 13 // W
+# define RO_Y_DOWN 1 // S
 // rotate_z
-# define rotate_z_UP 14 // E
-# define rotate_z_DOWN 2 // D
+# define RO_Z_UP 14 // E
+# define RO_Z_DOWN 2 // D
 
 // ZOOM
 # define MAX_ZOM 4.00
@@ -79,7 +83,6 @@
 typedef struct s_pnt
 {
 	int	z;
-	double gama;
 	int color;
 } pnt;
 
@@ -94,10 +97,20 @@ typedef struct	data_img
 	int		endian;
 }				t_data_img;
 
+typedef struct mouse
+{
+	int prev_x;
+	int prev_y;
+	int	x;
+	int y;
+	bool click_up;
+	bool click_on;
+} mouse;
 typedef struct s_fdf
 {
 	int height;
 	int width;
+	char *title;
 	
 	int win_w;
 	int win_h;
@@ -111,11 +124,14 @@ typedef struct s_fdf
 	float beta;
 	float gama;
 	// rotation
+
+	char *colos;
 	int		key;
 	bool first_click;
 	float *ro_x;	
 	float *ro_y;	
-	float *ro_z;	
+	float *ro_z;
+	mouse *pos_m;	
 
 	pnt **matrix;
 	t_data_img *img;
@@ -147,12 +163,14 @@ void	h_error(void);
 // init
 void	img_init(t_data_img *map_data);
 
+// print menu
+void	print_menu(fdf *data);
 
 // windows tools 
 void	ft_zoom(fdf *data, int _altitude, int _zoom);
 void	ft_padding(fdf *map_data);
 void	ft_swap(int *x, int *y);
-int 	ft_color(float z, float z1);
+int 	ft_color(float z, float z1 ,fdf *fdf);
 char	*ft_title(char *title);
 void	ft_win_resolution(fdf *map_data);
 void	ft_mange_win(char **argv, int argc, fdf *map_data);
@@ -160,6 +178,9 @@ void	ft_trid(float *x, float *y,float *z, fdf *data);
 // BONUS PART
 int	ft_movekey(int key, fdf *m_size);
 int	ft_mousekey(int button, int x, int y, fdf *param);
+int	ft_mouse_move(int x, int y, fdf *param);
+int ft_mouse_click_up(int button, int x, int y, fdf *param);
+int ft_close(int key, fdf *param);
 
 // angles
 

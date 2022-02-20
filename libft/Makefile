@@ -71,6 +71,9 @@ $(NAME): $(OBJS)
 	
 bonus: $(B_OBJS) $(OBJS)
 	@ar rc $(NAME) $(OBJS) $(B_OBJS)
+%.o:%.c libft.h Makefile
+	@echo "\t\tCompilation of $(notdir $<) done!"
+	@${CC} ${CFLAGS} -I . -o $@ -c $<
 	
 clean:
 	@rm -f *.o

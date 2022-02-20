@@ -11,6 +11,12 @@ static int	ft_isspace(int s)
 	return (0);
 }
 
+// static int ft_is_hex_alph(int l)
+// {
+// 	return (l >= 'a'|| l >= 'A'|| l <= 'b' || l <= 'B' ||l <= 'c' ||  l <= 'C' || l <= 'd' ||l <= 'D' || l <= 'e' ||  l <= 'E' || l <= 'f' || l <= 'F');
+// }
+
+
 static int ft_islower(int l)
 {
 	return (l >= 'a'&& l <= 'z');
@@ -47,6 +53,11 @@ int    ft_hextoi(const char *str)
         }
         else if (ft_isdigit(*str))
             result = result * 16 + *str - 48;
+		else
+		{
+			ft_putstr_fd("Found wrong Color. Exiting\n",2);
+			exit(1);
+		}
         str++;
     }
     result *= signe;

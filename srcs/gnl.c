@@ -16,7 +16,11 @@ char *ft_gnl(int fd)
         if (buff[0] == '\n')
             return (ft_strdup(line));
     }
+
     if (!line[0])
         return (NULL);
+	if (buff[i] && buff[i] == '\n')
+		line[i++] = '\n';
     return (ft_strdup(line));
 }
+

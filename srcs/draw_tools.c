@@ -22,6 +22,6 @@ char	*ft_title(char *title)
 		split[0][i] = ft_toupper(split[0][i]);
 		i++;
 	}
-	split[0] = ft_strjoin("graphics programming : ",split[0]);
+	//split[0] = ft_strjoin("graphics programming : ",split[0]);
 	return (split[0]);
 }

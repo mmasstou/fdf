@@ -1,13 +1,13 @@
 #include "../incs/fdf.h"
 
-void		ft_zoom(fdf *data)
-{
-	data->altitude = 1.2;
-	if (data->width >= 100)
-		data->zom = ((WIDTH / data->width) / 2) + 4;
-	else
-		data->zom = (WIDTH / (data->height * data->height ) + data->height) + 6;
-}
+// void		ft_zoom(fdf *data)
+// {
+// 	data->altitude = 1.2;
+// 	if (data->width >= 100)
+// 		data->zom = ((WIDTH / data->width) / 2) + 4;
+// 	else
+// 		data->zom = (WIDTH / (data->height * data->height ) + data->height) + 6;
+// }
 
 void	ft_padding(fdf *map_data)
 {
@@ -45,29 +45,21 @@ void	ft_win_resolution(fdf *map_data)
 		map_data->zom -= 1.4;
 	}
 }
-int ft_close(int key, fdf *param)
-{
-	if (key == 53)
-    {
-		mlx_destroy_window(param->img->mlx, param->img->win);
-		exit(0);
-	}
-	return (0);
-}
-void	ft_mange_win(char *argv1, fdf *map_data)
-{
-	ft_zoom(map_data) ;
-	img_init(map_data->img);
-	ft_win_resolution(map_data);
-	ft_padding(map_data);
-	map_data->img->mlx = mlx_init();
-	map_data->img->win = mlx_new_window(map_data->img->mlx,WIDTH, HEIGHT, ft_title(argv1));
-	map_data->img->img = mlx_new_image(map_data->img->mlx,WIDTH, HEIGHT);
-	map_data->img->img_addr = mlx_get_data_addr(map_data->img->img, &map_data->img->bpp, &map_data->img->line_len, &map_data->img->endian);
-	draw_map(map_data);
-	mlx_put_image_to_window(map_data->img->mlx, map_data->img->win, map_data->img->img, 0, 0);
-	mlx_hook(map_data->img->win, 2, 1L<<0, ft_close, map_data);
-}
+
+// void	ft_mange_win(char *argv1, fdf *map_data)
+// {
+// 	ft_zoom(map_data) ;
+// 	img_init(map_data->img);
+// 	ft_win_resolution(map_data);
+// 	ft_padding(map_data);
+// 	map_data->img->mlx = mlx_init();
+// 	map_data->img->win = mlx_new_window(map_data->img->mlx,WIDTH, HEIGHT, ft_title(argv1));
+// 	map_data->img->img = mlx_new_image(map_data->img->mlx,WIDTH, HEIGHT);
+// 	map_data->img->img_addr = mlx_get_data_addr(map_data->img->img, &map_data->img->bpp, &map_data->img->line_len, &map_data->img->endian);
+// 	draw_map(map_data);
+// 	mlx_put_image_to_window(map_data->img->mlx, map_data->img->win, map_data->img->img, 0, 0);
+// 	mlx_hook(map_data->img->win, 2, 1L<<0, ft_close, map_data);
+// }
 
 int main(int argc, char *argv[])
 {
@@ -87,7 +79,7 @@ int main(int argc, char *argv[])
 				if (!map_data->img)
 					return (0);
 				map_data->alpha = 0.8;
-				ft_mange_win(argv[1], map_data);
+				ft_mange_win(argv, argc, map_data);
 				mlx_loop(map_data->img->mlx);
 			}
 			else 

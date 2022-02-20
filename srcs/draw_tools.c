@@ -1,34 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_tools.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/20 20:09:16 by mmasstou          #+#    #+#             */
+/*   Updated: 2022/02/20 20:09:20 by mmasstou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/fdf.h"
-
-void	ft_swap(int *x, int *y)
-{
-	float	tmp;
-
-	tmp = *x;
-	*x = *y;
-	*y = tmp;
-}
 
 char	*ft_title(char *title)
 {
-	int 	i;
+	int		i;
 	char	**split;
 
 	i = 0;
 	split = ft_split(title, '/');
-	split = ft_split(split[1],'.');
+	split = ft_split(split[1], '.');
 	while (split[0][i])
 	{
 		split[0][i] = ft_toupper(split[0][i]);
 		i++;
 	}
-	//split[0] = ft_strjoin("graphics programming : ",split[0]);
 	return (split[0]);
-}
-
-int ft_abs(int a)
-{
-	if (a < 0)
-		a = -a;
-	return (a);
 }

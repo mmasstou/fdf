@@ -14,15 +14,6 @@
 # define  WHITE_COLOR  0xffffff
 # define  RED_COLOR 0xe80c0c
 
-# define ALPHA .8
-# define BETA .8
-# define TETA  (90 - ALPHA) 
-
-
-
-
-
-
 # define HEIGHT		1240
 # define WIDTH		2192
 
@@ -104,13 +95,6 @@ typedef struct mouse
 	bool click_on;
 } mouse;
 
-typedef struct color
-{
-	int red;
-	int green;
-	int blue;
-}		t_color;
-
 typedef struct s_fdf
 {
 	int height;
@@ -138,7 +122,6 @@ typedef struct s_fdf
 	float *ro_y;	
 	float *ro_z;
 	mouse *pos_m;
-	t_color *color;	
 
 	pnt **matrix;
 	t_data_img *img;
@@ -169,14 +152,13 @@ void	h_error(void);
 
 // init
 void	img_init(t_data_img *map_data);
-
+fdf		*data_init();
 // print menu
 void	print_menu(fdf *data);
 
 // windows tools 
 void	ft_zoom(fdf *data, int _altitude, int _zoom);
 void	ft_padding(fdf *map_data);
-void	ft_swap(int *x, int *y);
 int 	ft_color(float z, float z1 ,fdf *fdf);
 int 	ft_rgb(int per_r, int per_g, int per_b);
 char	*ft_title(char *title);

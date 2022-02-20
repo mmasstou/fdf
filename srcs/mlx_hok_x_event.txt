@@ -1,0 +1,7 @@
+/*
+** 02: keyPress
+** 04: ButtonPress
+** 05: ButtonRelease
+** 06: MotionNotify
+** 17: DestroyNotify
+*/

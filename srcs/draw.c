@@ -11,13 +11,12 @@ int ft_color(float z, float z1 ,fdf *fdf)
 		color = 0xFFFFFF;
 	else 
 		color = 0xFFFFFF;
-
-
 	if (z || z1)
 		return(color);
 	else
 		return(color);
 }
+
 int ft_close(int key, fdf *param)
 {
 	if (key == 53)
@@ -63,12 +62,10 @@ void	dda(float x1, float y1, float x2, float y2, fdf *fdf)
 {
 	float	dx;
 	float	dy;
-
 	int		max;
 	int		color;
 	float		z;
 	float		z1;
-
 	
 	color = fdf->matrix[(int)y1][(int)x1].color;
 	z = fdf->matrix[(int)y1][(int)x1].z;

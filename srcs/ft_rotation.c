@@ -1,33 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_rotation.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 09:58:52 by mmasstou          #+#    #+#             */
+/*   Updated: 2022/02/21 09:58:55 by mmasstou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/fdf.h"
 
-void	rotate_x(float *y, float *z, double alpha)
+void	rotate_x(int key, fdf *data)
 {
-	int previous_y;
-	printf("----------+ rotate_x\n");
-
-	previous_y = *y;
-	*y = *y * cos(alpha) + *z * sin(alpha);
-	*z = -*y * sin(alpha) + *z * cos(alpha);
+	if (key == RO_X_UP)
+	{
+		data->alpha += 0.1;
+		data->key = RO_X_UP;
+	}
+	if (key == RO_X_DOWN)
+	{
+		data->alpha -= 0.1;
+		data->key = RO_X_DOWN ;
+	}
 }
 
-void	rotate_y(float *x, float *z, double beta)
+void	rotate_y(int key, fdf *data)
 {
-	int previous_x;
-	printf("----------+ rotate_y\n");
-
-	previous_x = *x;
-	*x = *x * cos(beta) + *z * sin(beta);
-	*z = -*x * sin(beta) + *z * cos(beta);
+	if (key == RO_Y_UP)
+	{
+		data->alpha += 0.1;
+		data->key = RO_Y_UP ;
+	}
+	if (key == RO_Y_DOWN)
+	{
+		data->alpha -= 0.1;
+		data->key = RO_Y_DOWN ;
+	}
 }
 
-void	rotate_z(float *x, float *y, double alpha)
+void	rotate_z(int key, fdf *data)
 {
-	printf("----------+ rotate_z\n");
-	int previous_y;
-	int previous_x;
-
-	previous_x = *x;
-	previous_y = *y;
-	*x = *x * cos(alpha) + *y * sin(alpha);
-	*y = *y * cos(alpha) + *x * sin(alpha);
+	if (key == RO_Z_UP)
+	{
+		data->alpha += 0.1;
+		data->key = RO_Z_UP ;
+	}
+	if (key == RO_Z_DOWN)
+	{
+		data->alpha -= 0.1;
+		data->key = RO_Z_DOWN ;
+	}
 }

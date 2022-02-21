@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   altitude.c                                         :+:      :+:    :+:   */
+/*   window_resolution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 09:53:55 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/21 09:53:58 by mmasstou         ###   ########.fr       */
+/*   Created: 2022/02/21 18:07:46 by mmasstou          #+#    #+#             */
+/*   Updated: 2022/02/21 18:07:50 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/fdf.h"
 
-void	altitude(int key, t_fdf *data)
+void	resolution(t_fdf *map_data)
 {
-	if (key == ALTITUDE_UP)
-		data->altitude += 0.3 ;
-	if (key == ALTITUDE_DOWN)
-		data->altitude -= 0.3;
+	map_data->win_h = WIDTH;
+	map_data->win_h += (map_data->win_h * .25);
+	map_data->win_h *= map_data->zom;
+	map_data->win_w = HEIGHT;
+	map_data->win_w += (map_data->win_w * .75);
+	map_data->win_w *= map_data->zom;
+	if (map_data->win_w >= 2592)
+	{
+		map_data->win_w = 2592;
+		map_data->zom -= 1.6;
+	}
+	if (map_data->win_h >= 1440)
+	{
+		map_data->win_h = 1440;
+		map_data->zom -= 1.4;
+	}
 }

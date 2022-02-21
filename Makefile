@@ -1,6 +1,20 @@
 NAME = fdf1
 LIBFT_NAME = libft/libft.a
 
+
+define HEADER_m                          
+     _,---.                   _,---.  
+  .-`.' ,  \  _,..---._    .-`.' ,  \ 
+ /==/_  _.-'/==/,   -  \  /==/_  _.-' 
+/==/-  '..-.|==|   _   _\/==/-  '..-. 
+|==|_ ,    /|==|  .=.   ||==|_ ,    / 
+|==|   .--' |==|,|   | -||==|   .--'  
+|==|-  |    |==|  '='   /|==|-  |     
+/==/   \    |==|-,   _`/ /==/   \     
+`--`---'    `-.`.____.'  `--`---'  
+endef
+export HEADER_m
+
 #Colors
 _GREY=\x1b[30m
 _RED=\x1b[31m
@@ -14,15 +28,16 @@ _END=\x1b[0m
 
 HEADER = ./incs
 
-SRC = srcs/ft_hextoi.c  srcs/gnl.c srcs/read_file.c get_next_line/get_next_line.c  get_next_line/get_next_line_utils.c srcs/errors.c  srcs/ft_init.c  srcs/draw.c srcs/draw_tools.c
+SRC = srcs/ft_hextoi.c  srcs/gnl.c srcs/read_file.c get_next_line/get_next_line.c  get_next_line/get_next_line_utils.c srcs/errors.c  srcs/ft_init.c   srcs/ft_padding.c srcs/window_resolution.c srcs/ft_colors.c srcs/ft_zoom.c srcs/altitude.c srcs/draw_tools.c
 OBJ = $(SRC:.c=.o)
 
-SRC_MANDATORY = srcs/fdf.c
+SRC_MANDATORY = srcs/fdf.c srcs/draw.c  
 OBJ_MANDATORY = $(SRC_MANDATORY:.c=.o)
 
 
 
-SRC_BONUS = srcs/fdf_bonus.c srcs/ft_translate.c srcs/ft_scroll.c srcs/ft_rotation.c srcs/ft_colors.c srcs/menu.c srcs/ft_zoom.c srcs/ft_padding.c
+SRC_BONUS = srcs/fdf_bonus.c srcs/ft_translate.c  srcs/ft_rotation.c  srcs/menu.c   srcs/events_function.c  srcs/draw_bonus.c srcs/draw_tools_bonus.c
+
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
 CC = gcc
@@ -35,16 +50,19 @@ all: $(NAME)
 $(NAME): $(OBJ) $(OBJ_MANDATORY)
 	@make  bonus -C libft/
 	@$(CC) -o $(NAME)  $(OBJ) $(OBJ_MANDATORY) $(LIBFT_NAME)   $(FRAMEWORKS)  -g
+	@echo "\033[0m"
+	@echo "$(_WHITE_WHITE) $${HEADER_m} $(_END)";
 	@echo "\033[1;5;1;36m";
-	@echo "+-$(_WHITE_WHITE)mmasstou$(_WHITE)------MANDATORY-+";
+	@echo "+-$(_WHITE_WHITE)mmasstou$(_WHITE_WHITE) Ooo-Mandatory-ooO-+";
 	@echo "\033[0m"
 	
 bonus : $(OBJ) $(OBJ_BONUS)
 	@make bonus -C libft/
 	@$(CC) -o $(NAME)  $(SRC) $(SRC_BONUS) $(LIBFT_NAME) $(FRAMEWORKS)  -g
 	@echo "\033[0m"
+	@echo "$(_WHITE) $${HEADER_m} $(_END)";
 	@echo "\033[1;5;1;36m";
-	@echo "+-$(_WHITE_WHITE)mmasstou$(_WHITE)--------BONUS-+";
+	@echo "+-$(_WHITE)mmasstou$(_WHITE) Ooo-Bonus-ooO-+";
 	@echo "\033[0m"
 
 clean:

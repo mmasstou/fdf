@@ -12,7 +12,7 @@
 
 #include "../incs/fdf.h"
 
-void	ft_win_resolution(fdf *map_data)
+void	ft_win_resolution(t_fdf *map_data)
 {
 	map_data->win_h = WIDTH;
 	map_data->win_h += (map_data->win_h * .25);
@@ -32,7 +32,7 @@ void	ft_win_resolution(fdf *map_data)
 	}
 }
 
-void	ft_mange_win(char **argv, int argc, fdf *d)
+void	ft_mange_win_bonus(char **argv, int argc, t_fdf *d)
 {
 	if (argc == 4)
 		ft_zoom(d, ft_atoi(argv[2]), ft_atoi(argv[3]));
@@ -46,7 +46,7 @@ void	ft_mange_win(char **argv, int argc, fdf *d)
 	d->img->img = mlx_new_image(d->img->mlx, WIDTH, HEIGHT);
 	d->img->img_addr = mlx_get_data_addr(d->img->img, &d->img->bpp, \
 	&d->img->line_len, &d->img->endian);
-	draw_map(d);
+	draw_map_bonus(d);
 	mlx_put_image_to_window(d->img->mlx, d->img->win, d->img->img, 0, 0);
 	print_menu(d);
 	mlx_hook(d->img->win, 2, 1L << 0, ft_movekey, d);
@@ -57,7 +57,7 @@ void	ft_mange_win(char **argv, int argc, fdf *d)
 
 int	main(int argc, char *argv[])
 {
-	fdf	*map_data;
+	t_fdf	*map_data;
 
 	map_data = data_init();
 	if ((argc >= 2 && argc <= 4) && check_fd(argv[1]))
@@ -65,7 +65,7 @@ int	main(int argc, char *argv[])
 		if (argc == 2 || argc == 4)
 		{
 			ft_readfile(map_data, argv[1]);
-			ft_mange_win(argv, argc, map_data);
+			ft_mange_win_bonus(argv, argc, map_data);
 			mlx_loop(map_data->img->mlx);
 			free(map_data);
 			free(map_data->img);

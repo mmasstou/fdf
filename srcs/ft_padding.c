@@ -12,7 +12,7 @@
 
 #include "../incs/fdf.h"
 
-void	ft_padding(fdf *map_data)
+void	ft_padding(t_fdf *map_data)
 {
 	float	x;
 	float	y;

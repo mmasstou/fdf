@@ -12,7 +12,7 @@
 
 #include "../incs/fdf.h"
 
-static void	menu_status2(fdf *d, int colour)
+static void	menu_status2(t_fdf *d, int colour)
 {
 	colour = 0xFF0001;
 	if (d->altitude > 0)
@@ -33,7 +33,7 @@ static void	menu_status2(fdf *d, int colour)
 		ft_strjoin(" Colors : ", d->colos_name));
 }
 
-static void	menu_status1(fdf *d, int colour)
+static void	menu_status1(t_fdf *d, int colour)
 {
 	colour = 0x9efa76;
 	mlx_string_put(d->img->mlx, d->img->win, 10, 20, colour, "Status");
@@ -47,7 +47,7 @@ static void	menu_status1(fdf *d, int colour)
 		ft_strjoin(" Zoom : ", ft_itoa(d->zom)));
 }
 
-static void	map_key1(fdf *d, int c)
+static void	map_key1(t_fdf *d, int c)
 {
 	char	*menu;
 
@@ -72,7 +72,7 @@ static void	map_key1(fdf *d, int c)
 	mlx_string_put(d->img->mlx, d->img->win, 14, HEIGHT - 200, c, menu);
 }
 
-void	print_menu(fdf *data)
+void	print_menu(t_fdf *data)
 {
 	int		colour;
 

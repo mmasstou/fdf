@@ -12,7 +12,7 @@
 
 #include "../incs/fdf.h"
 
-void	rotate_x(int key, fdf *data)
+void	rotate_x(int key, t_fdf *data)
 {
 	if (key == RO_X_UP)
 	{
@@ -26,7 +26,7 @@ void	rotate_x(int key, fdf *data)
 	}
 }
 
-void	rotate_y(int key, fdf *data)
+void	rotate_y(int key, t_fdf *data)
 {
 	if (key == RO_Y_UP)
 	{
@@ -40,7 +40,7 @@ void	rotate_y(int key, fdf *data)
 	}
 }
 
-void	rotate_z(int key, fdf *data)
+void	rotate_z(int key, t_fdf *data)
 {
 	if (key == RO_Z_UP)
 	{
@@ -51,5 +51,24 @@ void	rotate_z(int key, fdf *data)
 	{
 		data->alpha -= 0.1;
 		data->key = RO_Z_DOWN ;
+	}
+}
+
+void	rotation(float *x, float *y, float z, t_fdf *data)
+{
+	if (data->key == RO_X_UP || data->key == RO_X_DOWN)
+	{
+		z = -*y * sin(data->alpha) + z * cos(data->alpha);
+		*y = *y * cos(data->alpha) + z * sin(data->alpha);
+	}
+	else if (data->key == RO_Y_UP || data->key == RO_Y_DOWN)
+	{
+		z = -*x * sin(data->alpha) + z * cos(data->alpha);
+		*x = *x * cos(data->alpha) + z * sin(data->alpha);
+	}
+	else if (data->key == RO_Z_UP || data->key == RO_Z_DOWN)
+	{
+		*x = *x * cos(data->alpha) + *y * sin(data->alpha);
+		*y = *y * cos(data->alpha) + *x * sin(data->alpha);
 	}
 }

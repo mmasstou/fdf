@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_hextoi.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 13:14:23 by mmasstou          #+#    #+#             */
+/*   Updated: 2022/02/21 13:14:25 by mmasstou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/fdf.h"
 
 static int	ft_isspace(int s)
@@ -11,55 +23,41 @@ static int	ft_isspace(int s)
 	return (0);
 }
 
-// static int ft_is_hex_alph(int l)
-// {
-// 	return (l >= 'a'|| l >= 'A'|| l <= 'b' || l <= 'B' ||l <= 'c' ||  l <= 'C' || l <= 'd' ||l <= 'D' || l <= 'e' ||  l <= 'E' || l <= 'f' || l <= 'F');
-// }
-
-
-static int ft_islower(int l)
+static int	ft_islower(int l)
 {
-	return (l >= 'a'&& l <= 'z');
+	return (l >= 'a' && l <= 'z');
 }
 
-static int ft_isupper(int l)
+void	m_alpha(int *result, char str)
 {
-	return (l >= 'A'&& l <= 'Z');
+	if (ft_islower(str))
+		*result = *result * 16 + str + 10 - 'a';
+	else
+		*result = *result * 16 + str + 10 - 'A';
 }
-int    ft_hextoi(const char *str)
-{
-    int    signe;
-    int    result;
 
-    signe = 1;
-    result = 0;
-    str += 2;
-    while (ft_isspace(*str))
-        str++;
-    if (*str == '+' || *str == '-')
-    {
-        if (*str == '-')
-            signe = -signe;
-        str++ ;
-    }
-    while (*str && ft_isalnum(*str))
-    {
-        if (ft_isalpha(*str))
-        {
-            if (ft_islower(*str))
-                result = result * 16 + *str + 10  - 'a';
-            else if (ft_isupper(*str))
-                result = result * 16 + *str + 10  - 'A';
-        }
-        else if (ft_isdigit(*str))
-            result = result * 16 + *str - 48;
+int	ft_hextoi(const char *str)
+{
+	int	var[2];
+
+	var[0] = 1;
+	var[1] = 0;
+	str += 2;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			var[0] = -var[0];
+		str++;
+	}
+	while (*str && ft_isalnum(*str))
+	{
+		if (ft_isalpha(*str))
+			m_alpha(&var[1],*str);
 		else
-		{
-			ft_putstr_fd("Found wrong Color. Exiting\n",2);
-			exit(1);
-		}
-        str++;
-    }
-    result *= signe;
-    return (result);
+			var[1] = var[1] * 16 + *str - 48;
+		str++;
+	}
+	return (var[1] *= var[0]);
 }

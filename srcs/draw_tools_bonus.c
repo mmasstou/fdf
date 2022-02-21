@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_tools.c                                       :+:      :+:    :+:   */
+/*   draw_tools_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,29 +12,32 @@
 
 #include "../incs/fdf.h"
 
-void	ft_drawline(t_fdf *map, int x, int y, int color)
+char	*ft_title(char *title)
 {
-	char	*dst;
+	int		i;
+	char	**split;
 
-	if ((x >= 0 && x < WIDTH) && (y >= 0 && y < HEIGHT))
+	i = 0;
+	split = ft_split(title, '/');
+	split = ft_split(split[1], '.');
+	while (split[0][i])
 	{
-		dst = map->img->img_addr + (y * \
-		map->img->line_len + x * (map->img->bpp / 8));
-		*(unsigned int *)dst = color;
+		split[0][i] = ft_toupper(split[0][i]);
+		i++;
 	}
+	return (split[0]);
 }
 
-void	pixel_manage(int x, int y, t_fdf *fdf, char c)
+int	re_draw(t_fdf *data)
 {
-	fdf->pixel->x1 = x;
-	fdf->pixel->y1 = y;
-	fdf->pixel->x2 = x;
-	fdf->pixel->y2 = y;
-	if (c == 'x')
-		fdf->pixel->x2 = x + 1;
-	if (c == 'y')
-		fdf->pixel->y2 = y + 1;
-	fdf->pixel->z = fdf->matrix[(int)y][(int)x].z;
-	fdf->pixel->z1 = fdf->matrix[(int)fdf->pixel->y2][(int)fdf->pixel->x2].z;
-	fdf->pixel->color = fdf->matrix[(int)y][(int)x].color;
+	mlx_clear_window(data->img->mlx, data->img->win);
+	mlx_destroy_image(data->img->mlx, data->img->img);
+	data->img->img = mlx_new_image(data->img->mlx, WIDTH, HEIGHT);
+	data->img->img_addr = mlx_get_data_addr(data->img->img, \
+	&data->img->bpp, &data->img->line_len, &data->img->endian);
+	draw_map_bonus(data);
+	mlx_put_image_to_window(data->img->mlx, \
+	data->img->win, data->img->img, 0, 0);
+	print_menu(data);
+	return (0);
 }

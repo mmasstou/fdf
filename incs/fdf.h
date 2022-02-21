@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 18:10:02 by mmasstou          #+#    #+#             */
+/*   Updated: 2022/02/21 18:10:04 by mmasstou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 
-#include <fcntl.h>
-#include <stdio.h>
-#include <string.h>
-#include "../get_next_line/get_next_line.h"
-#include "../libft/libft.h"
-#include <mlx.h>
-#include <math.h>
-#include <sys/errno.h>
-#include <stdbool.h>  
+# include <fcntl.h>
+# include <stdio.h>
+# include <string.h>
+# include "../get_next_line/get_next_line.h"
+# include "../libft/libft.h"
+# include <mlx.h>
+# include <math.h>
+# include <sys/errno.h>
+# include <stdbool.h>  
 
 # define  WHITE_COLOR  0xffffff
 # define  RED_COLOR 0xe80c0c
@@ -47,7 +59,11 @@
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
 
-
+// keybourd events
+# define LIFT 123
+# define RIGHT 124
+# define DOWN 125
+# define UP 126
 // COLORS KEY
 
 # define RANDOM_COLORS 15
@@ -71,10 +87,10 @@
 typedef struct s_pnt
 {
 	int	z;
-	int color;
-} pnt;
+	int	color;
+}	t_pnt;
 
-typedef struct	data_img
+typedef struct data_img
 {
 	void	*mlx;
 	void	*win;
@@ -87,101 +103,101 @@ typedef struct	data_img
 
 typedef struct mouse
 {
-	int prev_x;
-	int prev_y;
-	int	x;
-	int y;
-	bool click_up;
-	bool click_on;
-} mouse;
+	int		prev_x;
+	int		prev_y;
+	int		x;
+	int		y;
+	bool	click_up;
+	bool	click_on;
+}	t_mouse;
+
+typedef struct pixel
+{
+	float	x1;
+	float	y1;
+	float	x2;
+	float	y2;
+	int		z;
+	int		z1;
+	int		color;
+}		t_pixel;
 
 typedef struct s_fdf
 {
-	int height;
-	int width;
-	char *title;
-	
-	int win_w;
-	int win_h;
-
-	int pad_w;
-	int pad_h;
-
-	float zom;
-	float altitude;
-	float alpha;
-	float beta;
-	float gama;
-	// rotation
-
-	char *colos_name;
-	int		key;
-	bool first_click;
-	bool color_auto;
-	float *ro_x;	
-	float *ro_y;	
-	float *ro_z;
-	mouse *pos_m;
-
-	pnt **matrix;
-	t_data_img *img;
-} fdf ;
-
-typedef struct store_data
-{
-	fdf *map_data;
-	char *str;
-	int x;
-	int y;
-	int	fd;
-}	store_data;
+	int			height;
+	int			width;
+	char		*title;
+	int			win_w;
+	int			win_h;
+	int			pad_w;
+	int			pad_h;
+	float		zom;
+	float		altitude;
+	float		alpha;
+	float		beta;
+	float		gama;
+	char		*colos_name;
+	int			key;
+	bool		first_click;
+	bool		color_auto;
+	float		*ro_x;	
+	float		*ro_y;	
+	float		*ro_z;
+	t_mouse		*pos_m;
+	t_pixel		*pixel;
+	t_pnt		**matrix;
+	t_data_img	*img;
+}	t_fdf;
 
 // srcs:
-void	ft_readfile(fdf *fdf, char *fname);
-void	ft_drow_line(float x, float y, float x1, float y1, fdf *data);
-int		deal_key(int key, fdf *param);
-int    ft_hextoi(const char *str);
-char 	*ft_gnl(int fd);
-void	ft_drawline(fdf *map, int x, int y, int color);
-void	draw_map(fdf *fdf);
-int	ft_movekey(int key, fdf *m_size);
-int	ft_count_words(char *line,char sp);
+void	pixel_manage(int x, int y, t_fdf *fdf, char c);
+void	ft_readfile(t_fdf *fdf, char *fname);
+int		deal_key(int key, t_fdf *param);
+int		ft_hextoi(const char *str);
+char	*ft_gnl(int fd);
+void	ft_drawline(t_fdf *map, int x, int y, int color);
+void	draw_map(t_fdf *fdf);
+void	draw_map_bonus(t_fdf *fdf);
+int		ft_movekey(int key, t_fdf *m_size);
+int		ft_count_words(char *line, char sp);
 
 // error 
 void	h_error(void);
 
 // init
 void	img_init(t_data_img *map_data);
-fdf		*data_init();
+t_fdf	*data_init(void);
 // print menu
-void	print_menu(fdf *data);
+void	print_menu(t_fdf *data);
 
 // windows tools 
-void	ft_zoom(fdf *data, int _altitude, int _zoom);
-void	ft_padding(fdf *map_data);
-int 	ft_color(float z, float z1 ,fdf *fdf);
-int 	ft_rgb(int per_r, int per_g, int per_b);
+void	ft_zoom(t_fdf *data, int _altitude, int _zoom);
+void	ft_padding(t_fdf *map_data);
 char	*ft_title(char *title);
-void	ft_win_resolution(fdf *map_data);
-void	ft_mange_win(char **argv, int argc, fdf *map_data);
-void	ft_trid(float *x, float *y,float *z, fdf *data);
-int 	ft_abs(int a);
-// BONUS PART
-int	ft_movekey(int key, fdf *m_size);
-int	ft_mousekey(int button, int x, int y, fdf *param);
-int	ft_mouse_move(int x, int y, fdf *param);
-int ft_mouse_click_up(int button, int x, int y, fdf *param);
-int ft_close(int key, fdf *param);
+void	resolution(t_fdf *map_data);
 
-// angles
-
-// void	rotate_x(float *y, float z, double alpha);
-// void	rotate_y(float *x, float z, double beta);
-// void	rotate_z(float *x, float *y, double alpha);
-
+/* BONUS PART */
+int		re_draw(t_fdf *data);
+// events 
+int		ft_movekey(int key, t_fdf *m_size);
+int		ft_mousekey(int button, int x, int y, t_fdf *param);
+int		ft_mouse_move(int x, int y, t_fdf *param);
+int		ft_mouse_click_up(int button, int x, int y, t_fdf *param);
+// rotation
+void	rotation(float *x, float *y, float z, t_fdf *data);
+void	rotate_x(int key, t_fdf *data);
+void	rotate_y(int key, t_fdf *data);
+void	rotate_z(int key, t_fdf *data);
+void	translate(int key, t_fdf *data);
+// altitude
+void	altitude(int key, t_fdf *data);
+// colors
+int		ft_rgb(int per_r, int per_g, int per_b);
+int		ft_color(float z, float z1, t_fdf *fdf);
+void	colors(int key, t_fdf *data);
 
 // errors
-int 	check_fd(char *filename);
-void	check_line(char *line, fdf *data);
+int		check_fd(char *filename);
+void	check_line(char *line, t_fdf *data);
 
 #endif

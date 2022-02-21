@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 13:22:54 by mmasstou          #+#    #+#             */
+/*   Updated: 2022/02/21 13:23:05 by mmasstou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/fdf.h"
 
-int	ft_count_words(char *line,char sp)
+int	ft_count_words(char *line, char sp)
 {
 	char	**tab;
 	int		width;
@@ -15,7 +27,7 @@ int	ft_count_words(char *line,char sp)
 	return (width);
 }
 
-static void	store_row(pnt *matrix, char *line)
+static void	store_row(t_pnt *matrix, char *line)
 {
 	char	**split;
 	char	**tab;
@@ -23,7 +35,6 @@ static void	store_row(pnt *matrix, char *line)
 
 	j = 0;
 	split = ft_split(line, ' ');
-	
 	while (split[j])
 	{
 		if (ft_strchr(split[j], ',') == NULL)
@@ -43,18 +54,16 @@ static void	store_row(pnt *matrix, char *line)
 	free(split);
 }
 
-
-
-static void	ft_get_data(fdf *fdf, char *fname)
+static void	ft_get_data(t_fdf *fdf, char *fname)
 {
 	char	*line;
 	int		fd;
 	int		i;
 
 	i = 0;
-	fdf->matrix = (pnt **)malloc(sizeof(pnt *) * (fdf->height + 1));
+	fdf->matrix = (t_pnt **)malloc(sizeof(t_pnt *) * (fdf->height + 1));
 	while (i < fdf->height)
-		fdf->matrix[i++] = (pnt *)malloc(sizeof(pnt) * (fdf->width + 1));
+		fdf->matrix[i++] = (t_pnt *)malloc(sizeof(t_pnt) * (fdf->width + 1));
 	fd = open(fname, O_RDONLY);
 	if (fd < 1)
 		h_error();
@@ -62,7 +71,7 @@ static void	ft_get_data(fdf *fdf, char *fname)
 	i = 0;
 	while (line)
 	{
-		store_row(fdf->matrix[i                                                                                                                               ], line);
+		store_row(fdf->matrix[i], line);
 		line = get_next_line(fd);
 		++i;
 	}
@@ -71,7 +80,7 @@ static void	ft_get_data(fdf *fdf, char *fname)
 	fdf->matrix[i] = NULL;
 }
 
-void	ft_readfile(fdf *fdf, char *fname)
+void	ft_readfile(t_fdf *fdf, char *fname)
 {
 	char	*line;
 	int		fd;

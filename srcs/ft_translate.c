@@ -12,7 +12,7 @@
 
 #include "../incs/fdf.h"
 
-void	translate(int key, fdf *data)
+void	translate(int key, t_fdf *data)
 {
 	if (key == UP)
 		data->pad_h -= 10 ;

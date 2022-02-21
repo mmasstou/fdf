@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/21 12:41:53 by mmasstou          #+#    #+#             */
+/*   Updated: 2022/02/21 12:41:56 by mmasstou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/fdf.h"
 
 void	h_error(void)
@@ -6,9 +18,9 @@ void	h_error(void)
 	ft_putchar_fd('\n', STDERR);
 }
 
-int check_fd(char *filename)
+int	check_fd(char *filename)
 {
-	int fd;
+	int	fd;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -22,17 +34,17 @@ int check_fd(char *filename)
 	return (1);
 }
 
-void	check_line(char *line, fdf *data)
+void	check_line(char *line, t_fdf *data)
 {
 	if (line[0] == '\n' && data->height == 0)
 	{
-		
-		ft_putstr_fd("No data found\n",2);
+		ft_putstr_fd("No data found\n", 2);
 		exit(1);
 	}
-	else if ((data->width > ft_count_words(line, ' ')) || (line[0] == '\n' && data->height != 0))
+	else if ((data->width > ft_count_words(line, ' ')) || \
+	(line[0] == '\n' && data->height != 0))
 	{
-		ft_putstr_fd("Found wrong line length. Exiting\n",2);
+		ft_putstr_fd("Found wrong line length. Exiting\n", 2);
 		exit(1);
 	}
 }

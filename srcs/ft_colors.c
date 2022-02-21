@@ -63,7 +63,7 @@ int	ft_rgb(int per_r, int per_g, int per_b)
 	return (index);
 }
 
-void	colors(int key, fdf *data)
+void	colors(int key, t_fdf *data)
 {
 	if (key == RANDOM_COLORS)
 	{
@@ -77,7 +77,7 @@ void	colors(int key, fdf *data)
 	}
 }
 
-int	ft_color(float z, float z1, fdf *fdf)
+int	ft_color(float z, float z1, t_fdf *fdf)
 {
 	int	color;
 

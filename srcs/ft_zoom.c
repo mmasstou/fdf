@@ -12,7 +12,7 @@
 
 #include "../incs/fdf.h"
 
-void	ft_zoom(fdf *data, int _altitude, int _zoom)
+void	ft_zoom(t_fdf *data, int _altitude, int _zoom)
 {
 	if (_altitude == 0 || _zoom == 0)
 	{

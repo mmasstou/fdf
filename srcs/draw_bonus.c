@@ -14,6 +14,7 @@
 
 static void	isomitric_fdf(float *x, float *y, float z, t_fdf *data)
 {
+	rotation(x, y, z, data);
 	*x = (*x - *y) * cos(data->beta);
 	*y = -z + (*x + *y) * sin(data->beta);
 }
@@ -58,7 +59,7 @@ static void	dda(t_fdf *fdf)
 	}
 }
 
-void	draw_map(t_fdf *fdf)
+void	draw_map_bonus(t_fdf *fdf)
 {
 	int	x;
 	int	y;

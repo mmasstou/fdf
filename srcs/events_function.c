@@ -12,7 +12,7 @@
 
 #include "../incs/fdf.h"
 
-int	ft_movekey(int key, fdf *m_size)
+int	ft_movekey(int key, t_fdf *m_size)
 {
 	if (key == 53)
 	{
@@ -29,7 +29,7 @@ int	ft_movekey(int key, fdf *m_size)
 	return (0);
 }
 
-int	ft_mousekey(int button, int x, int y, fdf *param)
+int	ft_mousekey(int button, int x, int y, t_fdf *param)
 {
 	if (button == SCROLL_UP)
 		param->zom += 0.65;
@@ -45,7 +45,7 @@ int	ft_mousekey(int button, int x, int y, fdf *param)
 	return (1);
 }
 
-int	ft_mouse_move(int x, int y, fdf *param)
+int	ft_mouse_move(int x, int y, t_fdf *param)
 {
 	if (param->pos_m->click_on == true)
 	{
@@ -63,7 +63,7 @@ int	ft_mouse_move(int x, int y, fdf *param)
 	return (1);
 }
 
-int	ft_mouse_click_up(int button, int x, int y, fdf *param)
+int	ft_mouse_click_up(int button, int x, int y, t_fdf *param)
 {
 	if (button == LEFT_CLICK)
 		param->pos_m->click_on = false;

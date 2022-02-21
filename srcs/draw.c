@@ -19,7 +19,7 @@ static void	isomitric_fdf(float *x, float *y, float z, fdf *data)
 	*y = -z + (*x + *y) * sin(data->beta);
 }
 
-void	m_zoom(fdf *fdf)
+static void	m_zoom(fdf *fdf)
 {
 	fdf->pixel->x2 *= fdf->zom;
 	fdf->pixel->y2 *= fdf->zom;
@@ -35,7 +35,7 @@ void	m_zoom(fdf *fdf)
 	fdf->pixel->y2 += fdf->pad_h;
 }
 
-void	dda(fdf *fdf)
+static void	dda(fdf *fdf)
 {
 	float	d[2];
 	int		color;

@@ -14,11 +14,11 @@
 
 void	resolution(t_fdf *map_data)
 {
-	map_data->win_h = WIDTH;
-	map_data->win_h += (map_data->win_h * .25);
+	map_data->win_h = HEIGHT;
+	map_data->win_h += (map_data->win_h * .15);
 	map_data->win_h *= map_data->zom;
-	map_data->win_w = HEIGHT;
-	map_data->win_w += (map_data->win_w * .75);
+	map_data->win_w = WIDTH;
+	map_data->win_w += (map_data->win_w * .15);
 	map_data->win_w *= map_data->zom;
 	if (map_data->win_w >= 2592)
 	{

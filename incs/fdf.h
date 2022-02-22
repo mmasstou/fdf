@@ -32,6 +32,8 @@
 // # define WIDTH 1800
 // # define HEIGHT 1250
 
+#define ISO 34
+# define PARALL 35
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
@@ -90,6 +92,11 @@ typedef struct s_pnt
 	int	color;
 }	t_pnt;
 
+typedef struct projection
+{
+	bool	iso;
+	bool	parallel;
+}	t_proj;
 typedef struct data_img
 {
 	void	*mlx;
@@ -101,6 +108,13 @@ typedef struct data_img
 	int		endian;
 }				t_data_img;
 
+typedef struct def
+{
+	int zoom;
+	int pad_w;
+	int pad_h;
+	int altitude;
+}	t_default;
 typedef struct mouse
 {
 	int		prev_x;
@@ -137,16 +151,20 @@ typedef struct s_fdf
 	float		beta;
 	float		gama;
 	char		*colos_name;
+	char		*projection_name;
 	int			key;
 	bool		first_click;
 	bool		color_auto;
 	float		*ro_x;	
 	float		*ro_y;	
 	float		*ro_z;
+	t_default	*def;
 	t_mouse		*pos_m;
 	t_pixel		*pixel;
 	t_pnt		**matrix;
 	t_data_img	*img;
+	t_proj		*projection;
+
 }	t_fdf;
 
 // srcs:
@@ -160,7 +178,7 @@ void	draw_map(t_fdf *fdf);
 void	draw_map_bonus(t_fdf *fdf);
 int		ft_movekey(int key, t_fdf *m_size);
 int		ft_count_words(char *line, char sp);
-
+float	get_percent(int val, int perc);
 // error 
 void	h_error(void);
 

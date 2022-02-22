@@ -48,10 +48,23 @@ t_fdf	*data_init(void)
 	map_data->pos_m = (t_mouse *)malloc(sizeof(t_mouse));
 	if (!map_data->pos_m)
 		return (NULL);
+	map_data->projection = (t_proj *)malloc(sizeof(t_proj));
+	if (!map_data->projection)
+		return (NULL);
+	map_data->def = (t_default *)malloc(sizeof(t_default));
+	if (!map_data->def)
+		return (NULL);
 	if (pixel_init(map_data) == -1)
 		return (NULL);
-	map_data->alpha = 0.523599 ;
-	map_data->beta = 0.523599 ;
+	map_data->def->pad_h = 0;
+	map_data->def->pad_w = 0;
+	map_data->def->zoom = 0;
+	map_data->projection->iso = true;
+	map_data->projection->parallel = false;
+	map_data->projection_name = ft_strdup("ISOMITRIC");
+	map_data->alpha = 0 ;
+	map_data->beta = 0 ;
+	map_data->gama = 0 ;
 	map_data->key = -1;
 	map_data->colos_name = ft_strdup("Default");
 	map_data->color_auto = true;

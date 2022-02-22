@@ -31,7 +31,7 @@ HEADER = ./incs
 SRC = srcs/ft_hextoi.c  srcs/gnl.c srcs/read_file.c get_next_line/get_next_line.c  get_next_line/get_next_line_utils.c srcs/errors.c  srcs/ft_init.c   srcs/ft_padding.c srcs/window_resolution.c srcs/ft_colors.c srcs/ft_zoom.c srcs/altitude.c srcs/draw_tools.c
 OBJ = $(SRC:.c=.o)
 
-SRC_MANDATORY = srcs/fdf.c srcs/draw.c  
+SRC_MANDATORY = srcs/fdf.c srcs/draw.c  srcs/windows_res.c
 OBJ_MANDATORY = $(SRC_MANDATORY:.c=.o)
 
 
@@ -51,18 +51,18 @@ $(NAME): $(OBJ) $(OBJ_MANDATORY)
 	@make  bonus -C libft/
 	@$(CC) -o $(NAME)  $(OBJ) $(OBJ_MANDATORY) $(LIBFT_NAME)   $(FRAMEWORKS)  -g
 	@echo "\033[0m"
-	@echo "$(_WHITE_WHITE) $${HEADER_m} $(_END)";
+	# @echo "$(_BLUE) $${HEADER_m} $(_END)";
 	@echo "\033[1;5;1;36m";
-	@echo "+-$(_WHITE_WHITE)mmasstou$(_WHITE_WHITE) Ooo-Mandatory-ooO-+";
+	@echo "+-$(_BLUE)mmasstou Ooo-Mandatory-ooO-+$(_END)";
 	@echo "\033[0m"
 	
 bonus : $(OBJ) $(OBJ_BONUS)
 	@make bonus -C libft/
 	@$(CC) -o $(NAME)  $(SRC) $(SRC_BONUS) $(LIBFT_NAME) $(FRAMEWORKS)  -g
 	@echo "\033[0m"
-	@echo "$(_WHITE) $${HEADER_m} $(_END)";
+	# @echo "$(_GREEN) $${HEADER_m}$(_END)";
 	@echo "\033[1;5;1;36m";
-	@echo "+-$(_WHITE)mmasstou$(_WHITE) Ooo-Bonus-ooO-+";
+	@echo "+-$(_GREEN)mmasstou Ooo-Bonus-ooO-+ $(_END)";
 	@echo "\033[0m"
 
 clean:
@@ -75,4 +75,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY	:				all clean fclean re bonus
+.PHONY	:	all clean fclean re bonus

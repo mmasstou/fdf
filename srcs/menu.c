@@ -31,6 +31,14 @@ static void	menu_status2(t_fdf *d, int colour)
 		ft_strjoin(" y : ", ft_itoa(d->pad_h)));
 	mlx_string_put(d->img->mlx, d->img->win, 10, 160, 0x9efa76,
 		ft_strjoin(" Colors : ", d->colos_name));
+	mlx_string_put(d->img->mlx, d->img->win, 10, 180, 0x9efa76,
+		ft_strjoin(" Alpha (x rotation) : ", ft_itoa(d->alpha)));
+	mlx_string_put(d->img->mlx, d->img->win, 10, 200, 0x9efa76,
+		ft_strjoin(" Beta (y rotation) : ", ft_itoa(d->beta)));
+	mlx_string_put(d->img->mlx, d->img->win, 10, 220, 0x9efa76,
+		ft_strjoin(" Gamma (z rotation) : ", ft_itoa(d->gama)));
+	mlx_string_put(d->img->mlx, d->img->win, 10, 240, 0x9efa76,
+		ft_strjoin(" Projection : ", d->projection_name));
 }
 
 static void	menu_status1(t_fdf *d, int colour)
@@ -66,7 +74,7 @@ static void	map_key1(t_fdf *d, int c)
 	mlx_string_put(d->img->mlx, d->img->win, 14, HEIGHT - 140, c, menu);
 	menu = "|  R -> Random Colors || G -> Default color       |";
 	mlx_string_put(d->img->mlx, d->img->win, 14, HEIGHT - 160, c, menu);
-	menu = "| 1, 2, 3 - def, iso, paralel projection          |";
+	menu = "| 0, I, P - def, iso, paralel projection          |";
 	mlx_string_put(d->img->mlx, d->img->win, 14, HEIGHT - 180, c, menu);
 	menu = "| Map Key ----------------------------------------|";
 	mlx_string_put(d->img->mlx, d->img->win, 14, HEIGHT - 200, c, menu);

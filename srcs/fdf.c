@@ -31,8 +31,8 @@ void	ft_mange_win(char **argv, int argc, t_fdf *d)
 	img_init(d->img);
 	resolution(d);
 	ft_padding(d);
-	d->img->win = mlx_new_window(d->img->mlx, WIDTH, HEIGHT, "FDF");
-	d->img->img = mlx_new_image(d->img->mlx, WIDTH, HEIGHT);
+	d->img->win = mlx_new_window(d->img->mlx, d->win_w, d->win_h, "FDF");
+	d->img->img = mlx_new_image(d->img->mlx, d->win_w, d->win_h);
 	d->img->img_addr = mlx_get_data_addr(d->img->img, &d->img->bpp, \
 	&d->img->line_len, &d->img->endian);
 	draw_map(d);

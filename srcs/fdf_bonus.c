@@ -46,6 +46,10 @@ void	ft_mange_win_bonus(char **argv, int argc, t_fdf *d)
 	d->img->img = mlx_new_image(d->img->mlx, WIDTH, HEIGHT);
 	d->img->img_addr = mlx_get_data_addr(d->img->img, &d->img->bpp, \
 	&d->img->line_len, &d->img->endian);
+	d->def->zoom =  d->zom;
+	d->def->altitude =  d->altitude;
+	d->def->pad_h = d->pad_h;
+	d->def->pad_w = d->pad_w;
 	draw_map_bonus(d);
 	mlx_put_image_to_window(d->img->mlx, d->img->win, d->img->img, 0, 0);
 	print_menu(d);

@@ -89,7 +89,12 @@ int	ft_color(float z, float z1, t_fdf *fdf)
 	else
 		color = 0xFFFFFF;
 	if (z || z1)
-		return (color);
+	{
+		if (fdf->projection->parallel == true)
+			return (0xfb6f1b);
+		else
+			return (color);
+	}
 	else
 		return (color);
 }

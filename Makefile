@@ -51,7 +51,7 @@ $(NAME): $(OBJ) $(OBJ_MANDATORY)
 	@make  bonus -C libft/
 	@$(CC) -o $(NAME)  $(OBJ) $(OBJ_MANDATORY) $(LIBFT_NAME)   $(FRAMEWORKS)  -g
 	@echo "\033[0m"
-	# @echo "$(_BLUE) $${HEADER_m} $(_END)";
+	@echo "$(_BLUE) $${HEADER_m} $(_END)";
 	@echo "\033[1;5;1;36m";
 	@echo "+-$(_BLUE)mmasstou Ooo-Mandatory-ooO-+$(_END)";
 	@echo "\033[0m"
@@ -60,7 +60,7 @@ bonus : $(OBJ) $(OBJ_BONUS)
 	@make bonus -C libft/
 	@$(CC) -o $(NAME)  $(SRC) $(SRC_BONUS) $(LIBFT_NAME) $(FRAMEWORKS)  -g
 	@echo "\033[0m"
-	# @echo "$(_GREEN) $${HEADER_m}$(_END)";
+	@echo "$(_GREEN) $${HEADER_m}$(_END)";
 	@echo "\033[1;5;1;36m";
 	@echo "+-$(_GREEN)mmasstou Ooo-Bonus-ooO-+ $(_END)";
 	@echo "\033[0m"

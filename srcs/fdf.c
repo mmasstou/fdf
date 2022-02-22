@@ -29,7 +29,7 @@ void	ft_mange_win(char **argv, int argc, t_fdf *d)
 	else
 		ft_zoom(d, 0, 0);
 	img_init(d->img);
-	resolution(d);
+	ft_win_resolution(d);
 	ft_padding(d);
 	d->img->win = mlx_new_window(d->img->mlx, d->win_w, d->win_h, "FDF");
 	d->img->img = mlx_new_image(d->img->mlx, d->win_w, d->win_h);

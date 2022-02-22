@@ -19,12 +19,12 @@ void	ft_padding(t_fdf *map_data)
 
 	x = cos(map_data->alpha) * (map_data->height * map_data->zom);
 	y = cos(map_data->alpha) * (map_data->width * map_data->zom);
-	map_data->pad_w = map_data->width - (x + y);
+	map_data->pad_w = WIDTH - (x + y);
 	map_data->pad_w /= 2;
 	map_data->pad_w += x;
 	x = sin(map_data->alpha) * map_data->width * map_data->zom;
 	y = sin(map_data->alpha) * map_data->height * map_data->zom;
-	map_data->pad_h = map_data->height - (x + y);
+	map_data->pad_h = HEIGHT - (x + y);
 	map_data->pad_h /= 2;
 	map_data->pad_h +=  fmax(x, y) / 2 ;
 }

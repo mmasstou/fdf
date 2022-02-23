@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_resolution.c                                :+:      :+:    :+:   */
+/*   menu_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 18:07:46 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/21 18:07:50 by mmasstou         ###   ########.fr       */
+/*   Created: 2022/02/23 18:17:56 by mmasstou          #+#    #+#             */
+/*   Updated: 2022/02/23 18:17:58 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/fdf.h"
 
-void	resolution(t_fdf *map_data)
+void	print_line(t_fdf *fdf, int y, int color, char *menu)
 {
-	map_data->win_w = 1920;
-	map_data->win_h = 1080;
-}
-
-float	get_percent(int val, int perc)
-{
-	return ((val * perc) / 100);
+	mlx_string_put(fdf->img->mlx, fdf->img->win, 10, y, color, menu);
+	free(menu);
 }

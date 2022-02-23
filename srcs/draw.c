@@ -24,8 +24,8 @@ static void	m_zoom(t_fdf *fdf)
 	fdf->pixel->y2 *= fdf->zom;
 	fdf->pixel->x1 *= fdf->zom;
 	fdf->pixel->y1 *= fdf->zom;
-	fdf->pixel->z *= (fdf->altitude * (fdf->zom / 2));
-	fdf->pixel->z1 *= (fdf->altitude * (fdf->zom / 2));
+	fdf->pixel->z *= fdf->altitude;
+	fdf->pixel->z1 *= fdf->altitude;
 	isomitric_fdf(&fdf->pixel->x1, &fdf->pixel->y1, fdf->pixel->z);
 	isomitric_fdf(&fdf->pixel->x2, &fdf->pixel->y2, fdf->pixel->z1);
 	fdf->pixel->x1 += fdf->pad_w;

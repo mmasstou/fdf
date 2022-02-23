@@ -12,47 +12,33 @@
 
 #include "../incs/fdf.h"
 
+static	void	projct_type(t_fdf *fdf, bool iso, bool parallel)
+{
+	fdf->projection->iso = iso;
+	fdf->projection->parallel = parallel;
+	if (iso == true)
+		fdf->projection_name = ft_strdup("ISOMITRIC");
+	else
+		fdf->projection_name = ft_strdup("PARALLEL");
+}
+
 int	ft_movekey(int key, t_fdf *m_size)
 {
-	if (key ==  84)
-	{
-		m_size->projection->iso = true;
-		m_size->projection->parallel = false;
-		m_size->projection_name = ft_strdup("ISOMITRIC");
-		m_size->alpha = 0 ;
-		m_size->beta = 0 ;
-		m_size->gama = 0 ;
-		m_size->key = -1;
-		m_size->colos_name = ft_strdup("Default");
-		m_size->color_auto = true;
-		m_size->pad_h = m_size->def->pad_h;
-		m_size->pad_w = m_size->def->pad_w;
-		m_size->zom = m_size->def->zoom;
-		m_size->altitude = m_size->def->altitude;
-	}
+	if (key == 84)
+		defualt_projecton(m_size);
 	if (key == 53)
 	{
 		mlx_destroy_window(m_size->img->mlx, m_size->img->win);
 		exit(0);
 	}
 	if (key == ISO)
-	{
-		m_size->projection->iso = true;
-		m_size->projection->parallel = false;
-		m_size->projection_name = ft_strdup("ISOMITRIC");
-	}
+		projct_type(m_size, true, false);
 	if (key == PARALL)
-	{
-		m_size->projection->iso = false;
-		m_size->projection->parallel = true;
-		m_size->projection_name = ft_strdup("PARALLEL");
-	}
+		projct_type(m_size, false, true);
 	translate(key, m_size);
 	altitude(key, m_size);
 	colors(key, m_size);
-	rotate_x(key, m_size);
-	rotate_y(key, m_size);
-	rotate_z(key, m_size);
+	event_rotation(key, m_size);
 	re_draw(m_size);
 	return (0);
 }

@@ -18,10 +18,10 @@ void	ft_zoom(t_fdf *data, int _altitude, int _zoom)
 	{
 		data->altitude = 1;
 		if (data->width >= 100)
-			data->zom = ((WIDTH / data->width) / 2) + 3;
+			data->zom = ((data->win_w / data->width) / 2) + 3;
 		else
 		{
-			data->zom = (HEIGHT / (data->height \
+			data->zom = (data->win_h / (data->height \
 			* data->height) + data->height) + 26;
 		}
 	}

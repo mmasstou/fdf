@@ -16,7 +16,7 @@ void	ft_drawline(t_fdf *map, int x, int y, int color)
 {
 	char	*dst;
 
-	if ((x >= 0 && x < WIDTH) && (y >= 0 && y < HEIGHT))
+	if ((x >= 0 && x < map->win_w) && (y >= 0 && y < map->win_h))
 	{
 		dst = map->img->img_addr + (y * \
 		map->img->line_len + x * (map->img->bpp / 8));

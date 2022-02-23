@@ -29,8 +29,8 @@ void	ft_mange_win(char **argv, int argc, t_fdf *d)
 	else
 		ft_zoom(d, 0, 0);
 	img_init(d->img);
-	ft_win_resolution(d);
-	ft_padding(d);
+	resolution(d);
+	padding(d);
 	d->img->win = mlx_new_window(d->img->mlx, d->win_w, d->win_h, "FDF");
 	d->img->img = mlx_new_image(d->img->mlx, d->win_w, d->win_h);
 	d->img->img_addr = mlx_get_data_addr(d->img->img, &d->img->bpp, \
@@ -45,16 +45,15 @@ int	main(int argc, char *argv[])
 	t_fdf	*map_data;
 
 	map_data = data_init();
-	if ((argc >= 2 && argc <= 4) && check_fd(argv[1]))
+	if (map_data == NULL)
+		return (EXIT_FAILURE);
+	if ((argc >= 2 && argc <= 4) && check_fd(argv[1], map_data))
 	{
 		if (argc == 2 || argc == 4)
 		{
 			ft_readfile(map_data, argv[1]);
 			ft_mange_win(argv, argc, map_data);
 			mlx_loop(map_data->img->mlx);
-			free(map_data);
-			free(map_data->img);
-			free(map_data->pos_m);
 		}
 		else
 			return (ft_putstr_fd("Usage : ./fdf <filename> \
@@ -63,4 +62,6 @@ int	main(int argc, char *argv[])
 	else
 		return (ft_putstr_fd("Usage : ./fdf <filename> \
 		[ case_size z_size ]\n", 2), 1);
+	fdf_free(map_data);
+	return (EXIT_SUCCESS);
 }

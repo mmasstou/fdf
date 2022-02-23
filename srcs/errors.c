@@ -18,7 +18,7 @@ void	h_error(void)
 	ft_putchar_fd('\n', STDERR);
 }
 
-int	check_fd(char *filename)
+int	check_fd(char *filename, t_fdf *data)
 {
 	int	fd;
 
@@ -28,7 +28,8 @@ int	check_fd(char *filename)
 		ft_putstr_fd("No file ", 2);
 		ft_putstr_fd(filename, 2);
 		ft_putstr_fd("\n", 2);
-		exit (1);
+		fdf_free(data);
+		exit (EXIT_FAILURE);
 	}
 	close(fd);
 	return (1);
@@ -41,10 +42,14 @@ void	check_line(char *line, t_fdf *data)
 		ft_putstr_fd("No data found\n", 2);
 		exit(1);
 	}
-	else if ((data->width > ft_count_words(line, ' ')) || \
-	(line[0] == '\n' && data->height != 0))
-	{
-		ft_putstr_fd("Found wrong line length. Exiting\n", 2);
-		exit(1);
-	}
+	if (line[0] == '\n' && data->height != 0)
+		fdf_error_read(data, "No data found");
+}
+
+void	fdf_error_read(t_fdf *fdf, char *message_err)
+{
+	ft_putstr_fd(message_err, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+	fdf_free(fdf);
+	exit(EXIT_FAILURE);
 }

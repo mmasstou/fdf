@@ -12,63 +12,31 @@
 
 #include "../incs/fdf.h"
 
-void	rotate_x(int key, t_fdf *data)
+void	rotation_x(float *y, int *z, float alpha)
 {
-	if (key == RO_X_UP)
-	{
-		data->alpha += 0.05;
-		data->key = RO_X_UP;
-	}
-	if (key == RO_X_DOWN)
-	{
-		data->alpha -= 0.05;
-		data->key = RO_X_DOWN ;
-	}
+	int	pre_y;
+
+	pre_y = *y;
+	*y = pre_y * cos(alpha) + *z * sin(alpha);
+	*z = -pre_y * sin(alpha) + *z * cos(alpha);
 }
 
-void	rotate_y(int key, t_fdf *data)
+void	rotation_y(float *x, int *z, float beta)
 {
-	if (key == RO_Y_UP)
-	{
-		data->beta += 0.05;
-		data->key = RO_Y_UP ;
-	}
-	if (key == RO_Y_DOWN)
-	{
-		data->beta -= 0.05;
-		data->key = RO_Y_DOWN ;
-	}
+	int	pre_x;
+
+	pre_x = *x;
+	*x = pre_x * cos(beta) + *z * sin(beta);
+	*z = -pre_x * sin(beta) + *z * cos(beta);
 }
 
-void	rotate_z(int key, t_fdf *data)
+void	rotation_z(float *x, float *y, float gamma)
 {
-	if (key == RO_Z_UP)
-	{
-		data->gama += 0.05;
-		data->key = RO_Z_UP ;
-	}
-	if (key == RO_Z_DOWN)
-	{
-		data->gama -= 0.05;
-		data->key = RO_Z_DOWN ;
-	}
-}
+	int	pre_x;
+	int	pre_y;
 
-// void	rotation(float *x, float *y, float z, t_fdf *data)
-// {
-// 	if (data->key == RO_X_UP || data->key == RO_X_DOWN)
-// 	{
-// 		z = -*y * sin(data->alpha) + z * cos(data->alpha);
-// 		*y = *y * cos(data->alpha) + z * sin(data->alpha);
-// 	}
-// 	else if (data->key == RO_Y_UP || data->key == RO_Y_DOWN)
-// 	{
-// 		z = -*x * sin(data->alpha) + z * cos(data->alpha);
-// 		*x = *x * cos(data->alpha) + z * sin(data->alpha);
-// 	}
-// 	else if (data->key == RO_Z_UP || data->key == RO_Z_DOWN)
-// 	{
-// 		*x = *x * cos(data->alpha) + *y * sin(data->alpha);
-// 		*y = *y * cos(data->alpha) + *x * sin(data->alpha);
-// 	}
-// }
+	pre_x = *x;
+	pre_y = *y;
+	*x = pre_x * cos(gamma) - pre_y * sin(gamma);
+	*y = pre_x * sin(gamma) + pre_y * cos(gamma);
+}

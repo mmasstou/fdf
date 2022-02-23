@@ -35,6 +35,22 @@ int	pixel_init(t_fdf *fdf)
 	return (0);
 }
 
+static void	fdf_init_val(t_fdf *fdf)
+{
+	fdf->def->pad_h = 0;
+	fdf->def->pad_w = 0;
+	fdf->def->zoom = 0;
+	fdf->projection->iso = true;
+	fdf->projection->parallel = false;
+	fdf->projection_name = ft_strdup("ISOMITRIC");
+	fdf->alpha = 0 ;
+	fdf->beta = 0 ;
+	fdf->gama = 0 ;
+	fdf->key = -1;
+	fdf->colos_name = ft_strdup("Default");
+	fdf->color_auto = true;
+}
+
 t_fdf	*data_init(void)
 {
 	t_fdf	*map_data;
@@ -56,17 +72,31 @@ t_fdf	*data_init(void)
 		return (NULL);
 	if (pixel_init(map_data) == -1)
 		return (NULL);
-	map_data->def->pad_h = 0;
-	map_data->def->pad_w = 0;
-	map_data->def->zoom = 0;
-	map_data->projection->iso = true;
-	map_data->projection->parallel = false;
-	map_data->projection_name = ft_strdup("ISOMITRIC");
-	map_data->alpha = 0 ;
-	map_data->beta = 0 ;
-	map_data->gama = 0 ;
-	map_data->key = -1;
-	map_data->colos_name = ft_strdup("Default");
-	map_data->color_auto = true;
+	fdf_init_val(map_data);
 	return (map_data);
+}
+
+t_pnt	**map_init(t_fdf *fdf)
+{
+	int		i;
+
+	i = 0;
+	fdf->matrix = (t_pnt **)malloc(sizeof(t_pnt *) * (fdf->height + 1));
+	if (!fdf->matrix)
+	{
+		ft_putstr_fd("Allocate error \n", STDERR_FILENO);
+		fdf_free(fdf);
+		exit(EXIT_FAILURE);
+	}
+	while (i < fdf->height)
+	{
+		fdf->matrix[i++] = (t_pnt *)malloc(sizeof(t_pnt) * (fdf->width + 1));
+		if (!fdf->matrix)
+		{
+			ft_putstr_fd("Allocate error \n", STDERR_FILENO);
+			fdf_free(fdf);
+			exit(EXIT_FAILURE);
+		}
+	}
+	return (fdf->matrix);
 }

@@ -16,23 +16,33 @@ char	*ft_title(char *title)
 {
 	int		i;
 	char	**split;
+	char	**tab;
 
 	i = 0;
 	split = ft_split(title, '/');
-	split = ft_split(split[1], '.');
-	while (split[0][i])
+	while (split[i])
+		i++;
+	tab = ft_split(split[i - 1], '.');
+	i = 0;
+	while (split[i])
+		free(split[i++]);
+	free(split);
+	i = 0;
+	while (tab[0][i])
 	{
-		split[0][i] = ft_toupper(split[0][i]);
+		tab[0][i] = ft_toupper(tab[0][i]);
 		i++;
 	}
-	return (split[0]);
+	free(tab[1]);
+	free(tab);
+	return (tab[0]);
 }
 
 int	re_draw(t_fdf *data)
 {
 	mlx_clear_window(data->img->mlx, data->img->win);
 	mlx_destroy_image(data->img->mlx, data->img->img);
-	data->img->img = mlx_new_image(data->img->mlx, WIDTH, HEIGHT);
+	data->img->img = mlx_new_image(data->img->mlx, data->win_w, data->win_h);
 	data->img->img_addr = mlx_get_data_addr(data->img->img, \
 	&data->img->bpp, &data->img->line_len, &data->img->endian);
 	draw_map_bonus(data);

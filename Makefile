@@ -28,15 +28,15 @@ _END=\x1b[0m
 
 HEADER = ./incs
 
-SRC = srcs/ft_hextoi.c  srcs/gnl.c srcs/read_file.c get_next_line/get_next_line.c  get_next_line/get_next_line_utils.c srcs/errors.c  srcs/ft_init.c   srcs/ft_padding.c srcs/window_resolution.c srcs/ft_colors.c srcs/ft_zoom.c srcs/altitude.c srcs/draw_tools.c
+SRC = srcs/ft_hextoi.c  srcs/gnl.c srcs/read_file.c get_next_line/get_next_line.c  get_next_line/get_next_line_utils.c srcs/errors.c  srcs/ft_init.c   srcs/ft_padding.c srcs/window_resolution.c srcs/ft_colors.c srcs/ft_zoom.c srcs/altitude.c srcs/draw_tools.c srcs/fdf_free.c
 OBJ = $(SRC:.c=.o)
 
-SRC_MANDATORY = srcs/fdf.c srcs/draw.c  srcs/windows_res.c
+SRC_MANDATORY = srcs/fdf.c srcs/draw.c 
 OBJ_MANDATORY = $(SRC_MANDATORY:.c=.o)
 
 
 
-SRC_BONUS = srcs/fdf_bonus.c srcs/ft_translate.c  srcs/ft_rotation.c  srcs/menu.c   srcs/events_function.c  srcs/draw_bonus.c srcs/draw_tools_bonus.c
+SRC_BONUS = srcs/fdf_bonus.c srcs/ft_translate.c  srcs/ft_rotation.c  srcs/menu.c   srcs/events_function.c  srcs/draw_bonus.c srcs/draw_tools_bonus.c srcs/events_function_utils.c srcs/menu_utils.c
 
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 

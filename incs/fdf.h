@@ -29,17 +29,14 @@
 # define HEIGHT		1240
 # define WIDTH		2192
 
-// # define WIDTH 1800
-// # define HEIGHT 1250
-
-#define ISO 34
+# define ISO 34
 # define PARALL 35
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
 
-# define SUCCUSS 0
-# define ERROR -1
+// # define SUCCUSS 0
+// # define ERROR -1
 
 // ALTITUDE 
 # define ALTITUDE_UP 69
@@ -110,10 +107,10 @@ typedef struct data_img
 
 typedef struct def
 {
-	int zoom;
-	int pad_w;
-	int pad_h;
-	int altitude;
+	int	zoom;
+	int	pad_w;
+	int	pad_h;
+	int	altitude;
 }	t_default;
 typedef struct mouse
 {
@@ -155,9 +152,6 @@ typedef struct s_fdf
 	int			key;
 	bool		first_click;
 	bool		color_auto;
-	float		*ro_x;	
-	float		*ro_y;	
-	float		*ro_z;
 	t_default	*def;
 	t_mouse		*pos_m;
 	t_pixel		*pixel;
@@ -185,12 +179,15 @@ void	h_error(void);
 // init
 void	img_init(t_data_img *map_data);
 t_fdf	*data_init(void);
+t_pnt	**map_init(t_fdf *fdf);
 // print menu
 void	print_menu(t_fdf *data);
+void	print_line(t_fdf *fdf, int y, int color, char *menu);
 
 // windows tools 
 void	ft_zoom(t_fdf *data, int _altitude, int _zoom);
-void	ft_padding(t_fdf *map_data);
+void	padding(t_fdf *fdf);
+void	padding_bonus(t_fdf *fdf);
 char	*ft_title(char *title);
 void	resolution(t_fdf *map_data);
 
@@ -201,21 +198,31 @@ int		ft_movekey(int key, t_fdf *m_size);
 int		ft_mousekey(int button, int x, int y, t_fdf *param);
 int		ft_mouse_move(int x, int y, t_fdf *param);
 int		ft_mouse_click_up(int button, int x, int y, t_fdf *param);
-// rotation
-void	rotation(float *x, float *y, float z, t_fdf *data);
+// event utils
 void	rotate_x(int key, t_fdf *data);
 void	rotate_y(int key, t_fdf *data);
 void	rotate_z(int key, t_fdf *data);
 void	translate(int key, t_fdf *data);
-// altitude
 void	altitude(int key, t_fdf *data);
+void	defualt_projecton(t_fdf *fdf);
+void	event_rotation(int key, t_fdf *fdf);
+// rotation
+void	rotation_x(float *y, int *z, float alpha);
+void	rotation_y(float *x, int *z, float beta);
+void	rotation_z(float *x, float *y, float gamma);
+
+// altitude
 // colors
 int		ft_rgb(int per_r, int per_g, int per_b);
 int		ft_color(float z, float z1, t_fdf *fdf);
 void	colors(int key, t_fdf *data);
 
 // errors
-int		check_fd(char *filename);
+int		check_fd(char *filename, t_fdf *data);
 void	check_line(char *line, t_fdf *data);
 
+// free
+void	fdf_free(t_fdf *fdf);
+void	img_free(t_data_img *img);
+void	fdf_error_read(t_fdf *fdf, char *message_err);
 #endif

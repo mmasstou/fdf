@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window_resolution.c                                :+:      :+:    :+:   */
+/*   fdf_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/21 18:07:46 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/21 18:07:50 by mmasstou         ###   ########.fr       */
+/*   Created: 2022/02/23 16:08:19 by mmasstou          #+#    #+#             */
+/*   Updated: 2022/02/23 16:08:21 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/fdf.h"
 
-void	resolution(t_fdf *map_data)
+void	fdf_free(t_fdf *fdf)
 {
-	map_data->win_w = 1920;
-	map_data->win_h = 1080;
+	free(fdf->colos_name);
+	free(fdf->projection_name);
+	free(fdf->title);
+	free(fdf->matrix);
+	free(fdf->def);
+	free(fdf->pos_m);
+	free(fdf->pixel);
+	free(fdf->projection);
+	img_free(fdf->img);
 }
 
-float	get_percent(int val, int perc)
+void	img_free(t_data_img *img)
 {
-	return ((val * perc) / 100);
+	free(img->mlx);
+	free(img->win);
+	free(img->img);
+	free(img->img_addr);
+	free(img);
 }

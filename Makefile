@@ -1,6 +1,17 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/02/24 08:49:17 by mmasstou          #+#    #+#              #
+#    Updated: 2022/02/24 11:00:36 by mmasstou         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = fdf1
 LIBFT_NAME = libft/libft.a
-
 
 define HEADER_m                          
      _,---.                   _,---.  
@@ -28,7 +39,7 @@ _END=\x1b[0m
 
 HEADER = ./incs
 
-SRC = srcs/ft_hextoi.c  srcs/gnl.c srcs/read_file.c get_next_line/get_next_line.c  get_next_line/get_next_line_utils.c srcs/errors.c  srcs/ft_init.c   srcs/ft_padding.c srcs/window_resolution.c srcs/ft_colors.c srcs/ft_zoom.c srcs/altitude.c srcs/draw_tools.c srcs/fdf_free.c srcs/x_button.c
+SRC = srcs/ft_hextoi.c  srcs/gnl.c srcs/read_file.c get_next_line/get_next_line.c  get_next_line/get_next_line_utils.c srcs/errors.c  srcs/ft_init.c   srcs/ft_padding.c srcs/window_resolution.c srcs/ft_colors.c srcs/ft_zoom.c srcs/altitude.c srcs/draw_tools.c srcs/fdf_free.c srcs/close_button.c
 OBJ = $(SRC:.c=.o)
 
 SRC_MANDATORY = srcs/fdf.c srcs/draw.c 
@@ -50,15 +61,20 @@ all: $(NAME)
 $(NAME): $(OBJ) $(OBJ_MANDATORY)
 	@make  bonus -C libft/
 	@$(CC) -o $(NAME)  $(OBJ) $(OBJ_MANDATORY) $(LIBFT_NAME)   $(FRAMEWORKS)  -g
+	@echo "+- fdf $(_BLUE)[done]$(_END)-+";
 	@echo "\033[0m"
 	@echo "$(_BLUE) $${HEADER_m} $(_END)";
 	@echo "\033[1;5;1;36m";
 	@echo "+-$(_BLUE)mmasstou Ooo-Mandatory-ooO-+$(_END)";
 	@echo "\033[0m"
 	
+%.o:%.c ./incs/fdf.h Makefile
+	@${CC} ${CFLAGS} -I . -o $@ -c $<
+		
 bonus : $(OBJ) $(OBJ_BONUS)
 	@make bonus -C libft/
 	@$(CC) -o $(NAME)  $(SRC) $(SRC_BONUS) $(LIBFT_NAME) $(FRAMEWORKS)  -g
+	@echo "+- fdf $(_GREEN)[done]$(_END)-+";
 	@echo "\033[0m"
 	@echo "$(_GREEN) $${HEADER_m}$(_END)";
 	@echo "\033[1;5;1;36m";
@@ -71,6 +87,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@echo "+- clean $(NAME) \x1b[34m[done]\x1b[0m-+";
 	@make fclean -C libft/
 
 re: fclean all

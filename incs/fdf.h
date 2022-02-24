@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:10:02 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/21 18:10:04 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/24 15:21:07 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
-
-// # define SUCCUSS 0
-// # define ERROR -1
 
 // ALTITUDE 
 # define ALTITUDE_UP 69
@@ -175,6 +172,7 @@ int		ft_count_words(char *line, char sp);
 float	get_percent(int val, int perc);
 // error 
 void	h_error(void);
+void	ft_error(char *s);
 
 // init
 void	img_init(t_data_img *map_data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 19:32:24 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/20 19:32:28 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/24 12:22:10 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int	main(int argc, char *argv[])
 		}
 		else
 			return (ft_putstr_fd("Usage : ./fdf <filename> \
-			[ case_size z_size ]\n", 2), 1);
+			[ case_size | z_size ]\n", 2), 1);
 	}
 	else
 		return (ft_putstr_fd("Usage : ./fdf <filename> \
-		[ case_size z_size ]\n", 2), 1);
+		[ case_size |1 z_size ]\n", 2), 1);
 	fdf_free(map_data);
 }

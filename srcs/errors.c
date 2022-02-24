@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:53 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/21 12:41:56 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/24 15:18:53 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,22 @@ void	check_line(char *line, t_fdf *data)
 {
 	if (line[0] == '\n' && data->height == 0)
 	{
-		ft_putstr_fd("No data found\n", 2);
+		ft_putendl_fd("No data found", 2);
 		exit(1);
 	}
 	if (line[0] == '\n' && data->height != 0)
-		fdf_error_read(data, "No data found");
+		fdf_error_read(data, "Found wrong line length. Exiting");
 }
 
 void	fdf_error_read(t_fdf *fdf, char *message_err)
 {
-	ft_putstr_fd(message_err, STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
+	ft_putendl_fd(message_err, STDERR_FILENO);
 	fdf_free(fdf);
+	exit(EXIT_FAILURE);
+}
+
+void	ft_error(char *s)
+{
+	ft_putendl_fd(s, 2);
 	exit(EXIT_FAILURE);
 }

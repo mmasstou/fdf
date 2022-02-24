@@ -6,7 +6,7 @@
 #    By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 15:54:55 by mmasstou          #+#    #+#              #
-#    Updated: 2021/11/24 18:46:08 by mmasstou         ###   ########.fr        #
+#    Updated: 2022/02/24 10:58:11 by mmasstou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,8 +71,9 @@ $(NAME): $(OBJS)
 	
 bonus: $(B_OBJS) $(OBJS)
 	@ar rc $(NAME) $(OBJS) $(B_OBJS)
+	@echo "";
+	@echo "+- Libft \x1b[34m[done]\x1b[0m-+";
 %.o:%.c libft.h Makefile
-	@echo "\t\tCompilation of $(notdir $<) done!"
 	@${CC} ${CFLAGS} -I . -o $@ -c $<
 	
 clean:
@@ -80,6 +81,7 @@ clean:
 	
 fclean: clean
 	@rm -f $(NAME)
+	@echo "+- clean $(NAME) \x1b[34m[done]\x1b[0m-+";
 
 re: fclean all
 

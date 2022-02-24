@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:22:54 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/21 13:23:05 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/24 15:20:18 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,32 @@ int	ft_count_words(char *line, char sp)
 	return (width);
 }
 
-static void	store_pont(t_pnt *matrix, int z, int color, int j)
+static void	store_pont(t_pnt *matrix, char *z, char *color, int j)
 {
-	matrix[j].z = z;
-	matrix[j].color = color;
+	if (!color)
+	{
+		matrix[j].z = 0;
+		if (ft_strlen(z) < 3)
+			matrix[j].color = 0;
+		else
+		{
+			if (ft_strncmp(z, "0x", 2) == 0 || ft_strncmp(z, "0X", 2) == 0)
+				matrix[j].color = ft_hextoi(z);
+			else
+				matrix[j].color = ft_atoi(z);
+		}
+	}
+	else
+	{
+		matrix[j].z = ft_atoi(z);
+		if (ft_strncmp(color, "0x", 2) == 0 || ft_strncmp(color, "0X", 2) == 0)
+			matrix[j].color = ft_hextoi(color);
+		else
+			matrix[j].color = ft_atoi(color);
+	}
 }
 
-static void	store_row(t_pnt *matrix, char *line)
+static int	store_row(t_pnt *matrix, char *line)
 {
 	char	**split;
 	char	**tab;
@@ -44,12 +63,14 @@ static void	store_row(t_pnt *matrix, char *line)
 	split = ft_split(line, ' ');
 	while (split[j])
 	{
+		if (!ft_strncmp(split[j], "\n", ft_strlen(split[j])))
+			break ;
 		if (ft_strchr(split[j], ',') == NULL)
-			store_pont(matrix, ft_atoi(split[j]), -1, j);
+			store_pont(matrix, split[j], "0xFFFFFF", j);
 		else if (ft_strchr(split[j], ',') != NULL)
 		{
 			tab = ft_split(split[j], ',');
-			store_pont(matrix, ft_atoi(tab[0]), ft_hextoi(tab[1]), j);
+			store_pont(matrix, tab[0], tab[1], j);
 			free(tab[0]);
 			free(tab[1]);
 			free(tab);
@@ -58,6 +79,7 @@ static void	store_row(t_pnt *matrix, char *line)
 		++j;
 	}
 	free(split);
+	return (j);
 }
 
 static void	ft_get_data(t_fdf *fdf, char *fname)
@@ -65,6 +87,7 @@ static void	ft_get_data(t_fdf *fdf, char *fname)
 	char	*line;
 	int		fd;
 	int		i;
+	int		line_size;
 
 	fdf->matrix = map_init(fdf);
 	fd = open(fname, O_RDONLY);
@@ -72,7 +95,9 @@ static void	ft_get_data(t_fdf *fdf, char *fname)
 	i = 0;
 	while (line)
 	{
-		store_row(fdf->matrix[i], line);
+		line_size = store_row(fdf->matrix[i], line);
+		if (line_size < fdf->width)
+			ft_error("Found wrong line length. Exiting");
 		free(line);
 		line = get_next_line(fd);
 		++i;
@@ -89,10 +114,11 @@ void	ft_readfile(t_fdf *fdf, char *fname)
 	fd = open(fname, O_RDONLY);
 	line = get_next_line(fd);
 	if (line == NULL)
-		fdf_error_read(fdf, "No data found");
-	fdf->width = ft_count_words(line, ' ');
+		ft_error("No ddddc found");
+	fdf->width = ft_count_words(ft_strtrim(line, " "), ' ');
 	while (line)
 	{
+		line = ft_strtrim(line, " ");
 		check_line(line, fdf);
 		free(line);
 		line = get_next_line(fd);

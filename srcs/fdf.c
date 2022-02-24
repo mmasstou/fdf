@@ -30,7 +30,7 @@ void	ft_mange_win(char **argv, int argc, t_fdf *d)
 		ft_zoom(d, 0, 0);
 	img_init(d->img);
 	resolution(d);
-	padding(d);
+	padding_bonus(d);
 	d->img->win = mlx_new_window(d->img->mlx, d->win_w, d->win_h, "FDF");
 	d->img->img = mlx_new_image(d->img->mlx, d->win_w, d->win_h);
 	d->img->img_addr = mlx_get_data_addr(d->img->img, &d->img->bpp, \

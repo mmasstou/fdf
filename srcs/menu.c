@@ -111,7 +111,8 @@ void	print_menu(t_fdf *data)
 
 	colour = 0xFFFB00;
 	menu = ft_strjoin(" Map Title : ", data->title);
-	mlx_string_put(data->img->mlx, data->img->win, 983, 40, colour, menu);
+	mlx_string_put(data->img->mlx, data->img->win, data->win_w - \
+	1.5 * (data->win_w / 3), 40, colour, menu);
 	free(menu);
 	menu_status1(data, colour);
 	menu_status2(data, colour);

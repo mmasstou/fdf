@@ -17,16 +17,17 @@ void	padding_bonus(t_fdf *fdf)
 	float	x;
 	float	y;
 
-	x = cos(fdf->alpha) * (fdf->height * fdf->zom);
-	y = cos(fdf->alpha) * (fdf->width * fdf->zom);
+	x = cos(1.047) * (fdf->height * fdf->zom);
+	y = cos(0.523599) * (fdf->width * fdf->zom);
 	fdf->pad_w = fdf->win_w - (x + y);
 	fdf->pad_w /= 2;
-	fdf->pad_w += x;
-	x = sin(fdf->alpha) * fdf->width * fdf->zom;
-	y = sin(fdf->alpha) * fdf->height * fdf->zom;
+	fdf->pad_w += x * 1.5;
+	x = sin(0.523599) * fdf->width * fdf->zom;
+	y = cos(0.523599) * fdf->height * fdf->zom;
 	fdf->pad_h = fdf->win_h - (x + y);
 	fdf->pad_h /= 2;
-	fdf->pad_h += fmax(x, y);
+	fdf->pad_h += fabs(x) / 3;
+	fdf->pad_h += fdf->height * fdf->zom / 2 ;
 }
 
 void	padding(t_fdf *fdf)

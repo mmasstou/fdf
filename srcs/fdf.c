@@ -12,16 +12,6 @@
 
 #include "../incs/fdf.h"
 
-int	ft_close(int key, t_fdf *m_size)
-{
-	if (key == 53)
-	{
-		mlx_destroy_window(m_size->img->mlx, m_size->img->win);
-		exit(0);
-	}
-	return (0);
-}
-
 void	ft_mange_win(char **argv, int argc, t_fdf *d)
 {
 	if (argc == 4)
@@ -38,6 +28,7 @@ void	ft_mange_win(char **argv, int argc, t_fdf *d)
 	draw_map(d);
 	mlx_put_image_to_window(d->img->mlx, d->img->win, d->img->img, 0, 0);
 	mlx_hook(d->img->win, 2, 1L << 0, ft_close, d);
+	mlx_hook(d->img->win, 17, 1L << 17, x_button, d);
 }
 
 int	main(int argc, char *argv[])

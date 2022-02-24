@@ -198,6 +198,8 @@ int		ft_movekey(int key, t_fdf *m_size);
 int		ft_mousekey(int button, int x, int y, t_fdf *param);
 int		ft_mouse_move(int x, int y, t_fdf *param);
 int		ft_mouse_click_up(int button, int x, int y, t_fdf *param);
+int		x_button(t_fdf *fdf);
+int		ft_close(int key, t_fdf *fdf);
 // event utils
 void	rotate_x(int key, t_fdf *data);
 void	rotate_y(int key, t_fdf *data);

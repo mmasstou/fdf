@@ -6,7 +6,7 @@
 /*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:51:56 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/25 12:41:26 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:47:13 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	padding(t_fdf *fdf)
 	fdf->pad_h = fdf->win_h - (x + y);
 	fdf->pad_h /= 2;
 	fdf->pad_h += fabs(x) / 3;
-	fdf->pad_h += (fdf->height * fdf->zom )/ 2  ;
+	fdf->pad_h += (fdf->height * fdf->zom) / 2;
 }

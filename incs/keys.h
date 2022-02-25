@@ -6,7 +6,7 @@
 /*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 12:02:44 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/25 12:23:34 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:45:34 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@
 // ZOOM
 # define MAX_ZOM 4.00
 # define MIN_ZOM 1.00
-
 
 #endif

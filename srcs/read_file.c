@@ -6,7 +6,7 @@
 /*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:22:54 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/25 12:36:01 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:48:01 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@ int	ft_count_words(char *line, char sp)
 	int		width;
 
 	width = 0;
-	
 	tab = ft_split(line, sp);
 	while (tab[width])
 	{
 		free(tab[width]);
-		if (ft_strncmp(tab[width], "\n",1) == 0)
-			break;
+		if (ft_strncmp(tab[width], "\n", 1) == 0)
+			break ;
 		width++;
 	}
 	free(tab);

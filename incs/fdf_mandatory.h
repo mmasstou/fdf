@@ -6,12 +6,12 @@
 /*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 16:29:56 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/25 11:49:23 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:45:11 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_BONUS_H
-# define FDF_BONUS_H
+#ifndef FDF_MANDATORY_H
+# define FDF_MANDATORY_H
 
 # include "fdf.h"
 

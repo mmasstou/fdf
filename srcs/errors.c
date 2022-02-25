@@ -6,7 +6,7 @@
 /*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:53 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/25 09:30:02 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:45:56 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	check_fd(char *filename, t_fdf *data)
 		ft_putstr_fd("No file ", 2);
 		ft_putstr_fd(filename, 2);
 		ft_putstr_fd("\n", 2);
-		//fdf_free(data);
 		(void)data;
 		exit (EXIT_FAILURE);
 	}

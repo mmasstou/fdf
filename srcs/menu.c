@@ -6,7 +6,7 @@
 /*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:25:45 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/25 11:54:38 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:47:32 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	menu_status3(t_fdf *d, int color)
 	print_line(d, 220, color, ft_strjoin(" Gamma (z rotation) : ", val));
 	free(val);
 	print_line(d, 240, color, ft_strjoin(" Projection : ", d->projection_name));
-
 }
 
 static void	menu_status1(t_fdf *d, int colour)

@@ -6,12 +6,11 @@
 /*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 09:52:01 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/24 16:40:29 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:46:09 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/fdf.h"
-
 
 void	colors(int key, t_fdf *data)
 {

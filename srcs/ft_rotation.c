@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rotation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 09:58:52 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/21 09:58:55 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:54:25 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/fdf.h"
+#include "../incs/fdf_bonus.h"
 
 void	rotation_x(float *y, int *z, float alpha)
 {

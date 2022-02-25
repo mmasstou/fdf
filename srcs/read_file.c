@@ -6,7 +6,7 @@
 /*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:22:54 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/24 15:20:18 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:36:01 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ int	ft_count_words(char *line, char sp)
 	int		width;
 
 	width = 0;
+	
 	tab = ft_split(line, sp);
 	while (tab[width])
 	{
 		free(tab[width]);
+		if (ft_strncmp(tab[width], "\n",1) == 0)
+			break;
 		width++;
 	}
 	free(tab);
@@ -42,6 +45,7 @@ static void	store_pont(t_pnt *matrix, char *z, char *color, int j)
 			else
 				matrix[j].color = ft_atoi(z);
 		}
+		free(z);
 	}
 	else
 	{
@@ -114,11 +118,10 @@ void	ft_readfile(t_fdf *fdf, char *fname)
 	fd = open(fname, O_RDONLY);
 	line = get_next_line(fd);
 	if (line == NULL)
-		ft_error("No ddddc found");
-	fdf->width = ft_count_words(ft_strtrim(line, " "), ' ');
+		ft_error("No data found");
+	fdf->width = ft_count_words(line, ' ');
 	while (line)
 	{
-		line = ft_strtrim(line, " ");
 		check_line(line, fdf);
 		free(line);
 		line = get_next_line(fd);

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:36:47 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/21 12:36:50 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:07:26 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/fdf.h"
+#include "../incs/fdf_bonus.h"
 
 static void	fdf_iso(float *x, float *y, int *z)
 {
@@ -29,7 +29,11 @@ static void	isomitric_fdf(float *x, float *y, int *z, t_fdf *data)
 	rotation_y(x, z, data->beta);
 	rotation_z(x, y, data->gama);
 	if (data->projection->iso == true || data->key == 48)
+	{
+		if (data->key == 48)
+			free(data->projection_name);
 		fdf_iso(x, y, z);
+	}
 }
 
 static void	m_zoom(t_fdf *fdf)

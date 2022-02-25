@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_translate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:00:27 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/21 10:00:30 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:54:09 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/fdf.h"
+#include "../incs/fdf_bonus.h"
 
 void	translate(int key, t_fdf *data)
 {

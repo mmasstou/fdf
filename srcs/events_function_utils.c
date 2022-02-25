@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   events_function_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 16:06:46 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/23 16:06:48 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:55:08 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/fdf.h"
+#include "../incs/fdf_bonus.h"
 
 void	event_rotation(int key, t_fdf *fdf)
 {
@@ -65,12 +65,12 @@ void	defualt_projecton(t_fdf *fdf)
 {
 	fdf->projection->iso = true;
 	fdf->projection->parallel = false;
-	fdf->projection_name = ft_strdup("ISOMITRIC");
+	fdf->projection_name = "ISOMITRIC";
 	fdf->alpha = 0 ;
 	fdf->beta = 0 ;
 	fdf->gama = 0 ;
 	fdf->key = -1;
-	fdf->colos_name = ft_strdup("Default");
+	fdf->colos_name = "Default";
 	fdf->color_auto = true;
 	fdf->pad_h = fdf->def->pad_h;
 	fdf->pad_w = fdf->def->pad_w;

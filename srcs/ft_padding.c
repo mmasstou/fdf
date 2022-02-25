@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_padding.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:51:56 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/20 18:51:59 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:41:26 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/fdf.h"
 
-void	padding_bonus(t_fdf *fdf)
+void	padding(t_fdf *fdf)
 {
 	float	x;
 	float	y;
@@ -27,11 +27,5 @@ void	padding_bonus(t_fdf *fdf)
 	fdf->pad_h = fdf->win_h - (x + y);
 	fdf->pad_h /= 2;
 	fdf->pad_h += fabs(x) / 3;
-	fdf->pad_h += fdf->height * fdf->zom / 2 ;
-}
-
-void	padding(t_fdf *fdf)
-{
-	fdf->pad_w = get_percent(fdf->width, 350);
-	fdf->pad_h = get_percent(fdf->height, 45);
+	fdf->pad_h += (fdf->height * fdf->zom )/ 2  ;
 }

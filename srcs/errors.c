@@ -6,7 +6,7 @@
 /*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:41:53 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/24 15:18:53 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 09:30:02 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	check_fd(char *filename, t_fdf *data)
 		ft_putstr_fd("No file ", 2);
 		ft_putstr_fd(filename, 2);
 		ft_putstr_fd("\n", 2);
-		fdf_free(data);
+		//fdf_free(data);
+		(void)data;
 		exit (EXIT_FAILURE);
 	}
 	close(fd);
@@ -43,7 +44,7 @@ void	check_line(char *line, t_fdf *data)
 		exit(1);
 	}
 	if (line[0] == '\n' && data->height != 0)
-		fdf_error_read(data, "Found wrong line length. Exiting");
+		ft_error("Found wrong line length. Exiting");
 }
 
 void	fdf_error_read(t_fdf *fdf, char *message_err)

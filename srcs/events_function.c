@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   events_function.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 09:56:20 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/21 09:56:23 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:13:19 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/fdf.h"
+#include "../incs/fdf_bonus.h"
 
 static	void	projct_type(t_fdf *fdf, bool iso, bool parallel)
 {
 	fdf->projection->iso = iso;
 	fdf->projection->parallel = parallel;
 	if (iso == true)
-		fdf->projection_name = ft_strdup("ISOMITRIC");
+		fdf->projection_name = "ISOMITRIC";
 	else
-		fdf->projection_name = ft_strdup("PARALLEL");
+		fdf->projection_name = "PARALLEL";
 }
 
 int	ft_movekey(int key, t_fdf *m_size)
 {
-	if (key == 84)
+	if (key == DEF)
 		defualt_projecton(m_size);
 	if (key == 53)
 	{

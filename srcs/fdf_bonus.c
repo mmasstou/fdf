@@ -6,11 +6,11 @@
 /*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 19:32:24 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/24 12:22:10 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:58:30 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/fdf.h"
+#include "../incs/fdf_bonus.h"
 
 static void	int_defualt(t_fdf *d)
 {
@@ -20,12 +20,12 @@ static void	int_defualt(t_fdf *d)
 	d->def->pad_w = d->pad_w;
 }
 
-void	ft_mange_win_bonus(char **argv, int argc, t_fdf *d)
+static void	ft_mange_win_bonus(char **argv, int argc, t_fdf *d)
 {
 	if (argc == 4)
-		ft_zoom(d, ft_atoi(argv[2]), ft_atoi(argv[3]));
+		ft_zoom_bonus(d, ft_atoi(argv[2]), ft_atoi(argv[3]));
 	else
-		ft_zoom(d, 0, 0);
+		ft_zoom_bonus(d, 0, 0);
 	img_init(d->img);
 	d->title = ft_title(argv[1]);
 	resolution(d);

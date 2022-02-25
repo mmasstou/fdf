@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   menu_utils.c                                       :+:      :+:    :+:   */
+/*   fdf_mandatory.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/23 18:17:56 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/25 11:54:46 by mmasstou         ###   ########.fr       */
+/*   Created: 2022/02/24 16:29:56 by mmasstou          #+#    #+#             */
+/*   Updated: 2022/02/25 11:49:23 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/fdf_bonus.h"
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
-void	print_line(t_fdf *fdf, int y, int color, char *menu)
-{
-	mlx_string_put(fdf->img->mlx, fdf->img->win, 10, y, color, menu);
-	free(menu);
-}
+# include "fdf.h"
+
+void	draw_map(t_fdf *fdf);
+void	ft_zoom(t_fdf *fdf, int _altitude, int _zoom);
+void	padding(t_fdf *fdf);
+#endif

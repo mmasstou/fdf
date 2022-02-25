@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:25:45 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/20 18:25:53 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:54:38 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/fdf.h"
+#include "../incs/fdf_bonus.h"
 
 static void	menu_status2(t_fdf *d, int colour)
 {
@@ -51,6 +51,7 @@ static void	menu_status3(t_fdf *d, int color)
 	print_line(d, 220, color, ft_strjoin(" Gamma (z rotation) : ", val));
 	free(val);
 	print_line(d, 240, color, ft_strjoin(" Projection : ", d->projection_name));
+
 }
 
 static void	menu_status1(t_fdf *d, int colour)
@@ -60,12 +61,12 @@ static void	menu_status1(t_fdf *d, int colour)
 
 	colour = 0x9efa76;
 	mlx_string_put(d->img->mlx, d->img->win, 10, 20, colour, "Status");
-	val = ft_itoa(d->height);
+	val = ft_itoa(d->win_h);
 	menu = ft_strjoin(" Map Height : ", val);
 	mlx_string_put(d->img->mlx, d->img->win, 10, 40, colour, menu);
 	free(val);
 	free(menu);
-	val = ft_itoa(d->width);
+	val = ft_itoa(d->win_w);
 	menu = ft_strjoin(" Map Width : ", val);
 	mlx_string_put(d->img->mlx, d->img->win, 10, 60, colour, menu);
 	free(val);
@@ -84,23 +85,21 @@ static void	map_key1(t_fdf *d, int c)
 	char	*menu;
 
 	c = 0xFF7F00;
-	menu = "|-------------------------------------------------|";
-	mlx_string_put(d->img->mlx, d->img->win, 14, d->win_h - 60, c, menu);
-	menu = "| Q/A | W/S | E/D - rotation X/Y/Z                |";
+	menu = "| Q/A | W/S | E/D - rotation X/Y/Z";
 	mlx_string_put(d->img->mlx, d->img->win, 14, d->win_h - 80, c, menu);
-	menu = "| UP/DOWN/LEFT/RIGHT KEYBOARD KEY                 |";
+	menu = "| UP/DOWN/LEFT/RIGHT KEYBOARD KEY";
 	mlx_string_put(d->img->mlx, d->img->win, 14, d->win_h - 100, c, menu);
-	menu = "| SCROLL MOUSE  -> zoom                           |";
+	menu = "| SCROLL MOUSE  -> zoom";
 	mlx_string_put(d->img->mlx, d->img->win, 14, d->win_h - 120, c, menu);
-	menu = "| ALTITUDE UP/DOWN   + / -                        |";
+	menu = "| ALTITUDE UP/DOWN   + / -";
 	mlx_string_put(d->img->mlx, d->img->win, 14, d->win_h - 140, c, menu);
-	menu = "| LEFT CLICK AND MOUVE MOUSE TO MOUVE MAP         |";
+	menu = "| LEFT CLICK AND MOUVE MOUSE TO MOUVE MAP";
 	mlx_string_put(d->img->mlx, d->img->win, 14, d->win_h - 160, c, menu);
-	menu = "|  R -> Random Colors || G -> Default color       |";
+	menu = "|  R / G -> Random/Default color";
 	mlx_string_put(d->img->mlx, d->img->win, 14, d->win_h - 180, c, menu);
-	menu = "| 0, I, P - def, iso, paralel projection          |";
+	menu = "| O/I/P - def/iso/paralel projection";
 	mlx_string_put(d->img->mlx, d->img->win, 14, d->win_h - 200, c, menu);
-	menu = "| Map Key ----------------------------------------|";
+	menu = "| Map Key --------------------------";
 	mlx_string_put(d->img->mlx, d->img->win, 14, d->win_h - 220, c, menu);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 13:16:48 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/21 13:16:50 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/24 19:51:17 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ static void	fdf_init_val(t_fdf *fdf)
 	fdf->def->zoom = 0;
 	fdf->projection->iso = true;
 	fdf->projection->parallel = false;
-	fdf->projection_name = ft_strdup("ISOMITRIC");
+	fdf->projection_name = "ISOMITRIC";
 	fdf->alpha = 0 ;
 	fdf->beta = 0 ;
 	fdf->gama = 0 ;
 	fdf->key = -1;
-	fdf->colos_name = ft_strdup("Default");
+	fdf->colos_name = "Default";
 	fdf->color_auto = true;
 }
 

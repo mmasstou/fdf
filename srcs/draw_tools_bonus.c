@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_tools_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 20:09:16 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/20 20:09:20 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:55:38 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/fdf.h"
+#include "../incs/fdf_bonus.h"
 
 char	*ft_title(char *title)
 {

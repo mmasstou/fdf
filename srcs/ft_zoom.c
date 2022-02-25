@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_zoom.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasstou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:46:52 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/20 18:46:54 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:56:28 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/fdf.h"
+#include "../incs/fdf_mandatory.h"
 
-void	ft_zoom(t_fdf *data, int _altitude, int _zoom)
+void	ft_zoom(t_fdf *data, int _zoom, int _altitude)
 {
 	if (_altitude == 0 || _zoom == 0)
 	{
@@ -22,7 +22,7 @@ void	ft_zoom(t_fdf *data, int _altitude, int _zoom)
 		else
 		{
 			data->zom = (data->win_h / (data->height \
-			* data->height) + data->height) + 22;
+			* data->height) + data->height) + 24;
 		}
 	}
 	else

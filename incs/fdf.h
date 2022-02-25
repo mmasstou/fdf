@@ -6,7 +6,7 @@
 /*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:10:02 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/24 15:21:07 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 12:23:45 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # include <mlx.h>
 # include <math.h>
 # include <sys/errno.h>
-# include <stdbool.h>  
+# include <stdbool.h> 
+# include "keys.h"
 
 # define  WHITE_COLOR  0xffffff
 # define  RED_COLOR 0xe80c0c
@@ -29,56 +30,9 @@
 # define HEIGHT		1240
 # define WIDTH		2192
 
-# define ISO 34
-# define PARALL 35
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
-
-// ALTITUDE 
-# define ALTITUDE_UP 69
-# define ALTITUDE_DOWN 78
-# define ALTITUDE_MIN 0.50
-
-// ALPHA
-
-# define ALPHA_UP 116
-# define ALPHA_DOWN 121
-
-# define BETA_UP 117
-# define BETA_DOWN 115
-
-// MOUSE EVENTS
-# define LEFT_CLICK 1
-# define RIGHT_CLICK 2
-# define MIDDLE_CLICK 3
-# define SCROLL_UP 4
-# define SCROLL_DOWN 5
-
-// keybourd events
-# define LIFT 123
-# define RIGHT 124
-# define DOWN 125
-# define UP 126
-// COLORS KEY
-
-# define RANDOM_COLORS 15
-# define DEFAULT_COLORS 5
-
-// ROTATION
-// rotate_x
-# define RO_X_UP 12 // Q
-# define RO_X_DOWN 0 // A
-// rotate_y
-# define RO_Y_UP 13 // W
-# define RO_Y_DOWN 1 // S
-// rotate_z
-# define RO_Z_UP 14 // E
-# define RO_Z_DOWN 2 // D
-
-// ZOOM
-# define MAX_ZOM 4.00
-# define MIN_ZOM 1.00
 
 typedef struct s_pnt
 {
@@ -115,7 +69,6 @@ typedef struct mouse
 	int		prev_y;
 	int		x;
 	int		y;
-	bool	click_up;
 	bool	click_on;
 }	t_mouse;
 
@@ -147,7 +100,6 @@ typedef struct s_fdf
 	char		*colos_name;
 	char		*projection_name;
 	int			key;
-	bool		first_click;
 	bool		color_auto;
 	t_default	*def;
 	t_mouse		*pos_m;
@@ -161,66 +113,26 @@ typedef struct s_fdf
 // srcs:
 void	pixel_manage(int x, int y, t_fdf *fdf, char c);
 void	ft_readfile(t_fdf *fdf, char *fname);
-int		deal_key(int key, t_fdf *param);
 int		ft_hextoi(const char *str);
-char	*ft_gnl(int fd);
 void	ft_drawline(t_fdf *map, int x, int y, int color);
-void	draw_map(t_fdf *fdf);
-void	draw_map_bonus(t_fdf *fdf);
-int		ft_movekey(int key, t_fdf *m_size);
 int		ft_count_words(char *line, char sp);
-float	get_percent(int val, int perc);
-// error 
-void	h_error(void);
-void	ft_error(char *s);
-
 // init
 void	img_init(t_data_img *map_data);
 t_fdf	*data_init(void);
 t_pnt	**map_init(t_fdf *fdf);
-// print menu
-void	print_menu(t_fdf *data);
-void	print_line(t_fdf *fdf, int y, int color, char *menu);
 
 // windows tools 
-void	ft_zoom(t_fdf *data, int _altitude, int _zoom);
-void	padding(t_fdf *fdf);
-void	padding_bonus(t_fdf *fdf);
-char	*ft_title(char *title);
 void	resolution(t_fdf *map_data);
-
-/* BONUS PART */
-int		re_draw(t_fdf *data);
 // events 
-int		ft_movekey(int key, t_fdf *m_size);
-int		ft_mousekey(int button, int x, int y, t_fdf *param);
-int		ft_mouse_move(int x, int y, t_fdf *param);
-int		ft_mouse_click_up(int button, int x, int y, t_fdf *param);
 int		x_button(t_fdf *fdf);
 int		ft_close(int key, t_fdf *fdf);
-// event utils
-void	rotate_x(int key, t_fdf *data);
-void	rotate_y(int key, t_fdf *data);
-void	rotate_z(int key, t_fdf *data);
-void	translate(int key, t_fdf *data);
-void	altitude(int key, t_fdf *data);
-void	defualt_projecton(t_fdf *fdf);
-void	event_rotation(int key, t_fdf *fdf);
-// rotation
-void	rotation_x(float *y, int *z, float alpha);
-void	rotation_y(float *x, int *z, float beta);
-void	rotation_z(float *x, float *y, float gamma);
-
-// altitude
 // colors
-int		ft_rgb(int per_r, int per_g, int per_b);
 int		ft_color(float z, float z1, t_fdf *fdf);
-void	colors(int key, t_fdf *data);
-
 // errors
 int		check_fd(char *filename, t_fdf *data);
 void	check_line(char *line, t_fdf *data);
-
+void	h_error(void);
+void	ft_error(char *s);
 // free
 void	fdf_free(t_fdf *fdf);
 void	img_free(t_data_img *img);

@@ -6,11 +6,11 @@
 #    By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/24 08:49:17 by mmasstou          #+#    #+#              #
-#    Updated: 2022/02/24 11:00:36 by mmasstou         ###   ########.fr        #
+#    Updated: 2022/02/25 12:29:52 by mmasstou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fdf1
+NAME = fdf
 LIBFT_NAME = libft/libft.a
 
 define HEADER_m                          
@@ -39,15 +39,15 @@ _END=\x1b[0m
 
 HEADER = ./incs
 
-SRC = srcs/ft_hextoi.c  srcs/gnl.c srcs/read_file.c get_next_line/get_next_line.c  get_next_line/get_next_line_utils.c srcs/errors.c  srcs/ft_init.c   srcs/ft_padding.c srcs/window_resolution.c srcs/ft_colors.c srcs/ft_zoom.c srcs/altitude.c srcs/draw_tools.c srcs/fdf_free.c srcs/close_button.c
+SRC = srcs/ft_hextoi.c  srcs/read_file.c get_next_line/get_next_line.c  get_next_line/get_next_line_utils.c srcs/errors.c  srcs/ft_init.c   srcs/window_resolution.c srcs/ft_colors.c  srcs/altitude.c srcs/draw_tools.c srcs/fdf_free.c srcs/close_button.c
 OBJ = $(SRC:.c=.o)
 
-SRC_MANDATORY = srcs/fdf.c srcs/draw.c 
+SRC_MANDATORY = srcs/fdf.c srcs/draw.c  srcs/ft_zoom.c srcs/ft_padding.c
 OBJ_MANDATORY = $(SRC_MANDATORY:.c=.o)
 
 
 
-SRC_BONUS = srcs/fdf_bonus.c srcs/ft_translate.c  srcs/ft_rotation.c  srcs/menu.c   srcs/events_function.c  srcs/draw_bonus.c srcs/draw_tools_bonus.c srcs/events_function_utils.c srcs/menu_utils.c
+SRC_BONUS = srcs/fdf_bonus.c srcs/ft_translate.c  srcs/ft_rotation.c  srcs/menu.c   srcs/events_function.c  srcs/draw_bonus.c srcs/draw_tools_bonus.c srcs/events_function_utils.c srcs/menu_utils.c srcs/ft_zoom_bonus.c srcs/ft_padding_bonus.c
 
 OBJ_BONUS = $(SRC_BONUS:.c=.o)
 
@@ -58,28 +58,29 @@ FRAMEWORKS =  -lmlx -framework AppKit -framework OpenGL
 all: $(NAME)
 
 
-$(NAME): $(OBJ) $(OBJ_MANDATORY)
-	@make  bonus -C libft/
-	@$(CC) -o $(NAME)  $(OBJ) $(OBJ_MANDATORY) $(LIBFT_NAME)   $(FRAMEWORKS)  -g
-	@echo "+- fdf $(_BLUE)[done]$(_END)-+";
+$(NAME): $(OBJ) $(OBJ_MANDATORY) 
 	@echo "\033[0m"
 	@echo "$(_BLUE) $${HEADER_m} $(_END)";
 	@echo "\033[1;5;1;36m";
 	@echo "+-$(_BLUE)mmasstou Ooo-Mandatory-ooO-+$(_END)";
 	@echo "\033[0m"
+	@make bonus -C libft/
+	@$(CC) -o $(NAME)  $(SRC) $(SRC_MANDATORY) $(LIBFT_NAME)   $(FRAMEWORKS)  -g
+	@echo "+- fdf $(_GREEN)[done]$(_END)-+";
 	
-%.o:%.c ./incs/fdf.h Makefile
+%.o:%.c ./incs/fdf.h ./incs/fdf_bonus.h  ./incs/fdf_mandatory.h Makefile
 	@${CC} ${CFLAGS} -I . -o $@ -c $<
 		
-bonus : $(OBJ) $(OBJ_BONUS)
-	@make bonus -C libft/
-	@$(CC) -o $(NAME)  $(SRC) $(SRC_BONUS) $(LIBFT_NAME) $(FRAMEWORKS)  -g
-	@echo "+- fdf $(_GREEN)[done]$(_END)-+";
+bonus : $(OBJ) $(OBJ_BONUS) 
 	@echo "\033[0m"
 	@echo "$(_GREEN) $${HEADER_m}$(_END)";
 	@echo "\033[1;5;1;36m";
 	@echo "+-$(_GREEN)mmasstou Ooo-Bonus-ooO-+ $(_END)";
 	@echo "\033[0m"
+	@make bonus -C libft/
+	@$(CC) -o $(NAME)  $(SRC) $(SRC_BONUS) $(LIBFT_NAME) $(FRAMEWORKS)  -g
+	@echo "+- fdf $(_GREEN)[done]$(_END)-+";
+	
 
 clean:
 	@rm -f $(OBJ) $(OBJ_MANDATORY) $(OBJ_BONUS)

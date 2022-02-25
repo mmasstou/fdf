@@ -6,13 +6,13 @@
 /*   By: mmasstou <mmasstou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 18:05:50 by mmasstou          #+#    #+#             */
-/*   Updated: 2022/02/24 08:48:49 by mmasstou         ###   ########.fr       */
+/*   Updated: 2022/02/25 11:56:18 by mmasstou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/fdf.h"
+#include "../incs/fdf_mandatory.h"
 
-void	ft_mange_win(char **argv, int argc, t_fdf *d)
+static void	ft_mange_win(char **argv, int argc, t_fdf *d)
 {
 	if (argc == 4)
 		ft_zoom(d, ft_atoi(argv[2]), ft_atoi(argv[3]));
@@ -20,7 +20,7 @@ void	ft_mange_win(char **argv, int argc, t_fdf *d)
 		ft_zoom(d, 0, 0);
 	img_init(d->img);
 	resolution(d);
-	padding_bonus(d);
+	padding(d);
 	d->img->win = mlx_new_window(d->img->mlx, d->win_w, d->win_h, "FDF");
 	d->img->img = mlx_new_image(d->img->mlx, d->win_w, d->win_h);
 	d->img->img_addr = mlx_get_data_addr(d->img->img, &d->img->bpp, \
